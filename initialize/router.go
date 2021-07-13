@@ -1,11 +1,18 @@
 package initialize
 
 import (
+	"MCS_Server/router"
+	_ "MCS_Server/router"
 	"github.com/gin-gonic/gin"
 )
 
 func Routers() *gin.Engine {
-	router:= gin.Default()
+	Router:= gin.Default()
 
-	return router
+	routerGroup := Router.Group("")
+	{
+		router.InitUserRouter(routerGroup)
+	}
+
+	return Router
 }
