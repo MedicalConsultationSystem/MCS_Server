@@ -1,6 +1,8 @@
 mysql:
   path: '127.0.0.1'
-  config: ''
-  db-name: ''
+  config: 'charset=utf8mb4&parseTime=false&loc=Local'
+  db-name: 'mcs'
   username: 'root'
   password: '123456'
+  max-idle-conns: 10
+  max-open-conns: 100

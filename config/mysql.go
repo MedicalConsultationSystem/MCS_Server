@@ -6,4 +6,6 @@ type Mysql struct {
 	Dbname string
 	Username string
 	Password string
+	MaxIdleConns int
+	MaxOpenConns int
 }
