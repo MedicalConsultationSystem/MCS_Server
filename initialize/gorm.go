@@ -12,4 +12,5 @@ func Gorm() *gorm.DB {
 	}
 	dburl := msg.Username + ":" + msg.Password + "@tcp(" + msg.Path + ")/" + msg.Dbname + "?" + msg.Config
 
+
 }
