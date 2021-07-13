@@ -8,6 +8,7 @@ import (
 )
 
 func Viper() *viper.Viper {
+	viper.AddConfigPath(".")
 	v := viper.New()
 	v.SetConfigName(global.ConfigName)
 	v.SetConfigType("yaml")

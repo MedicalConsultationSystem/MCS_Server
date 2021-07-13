@@ -1,4 +1,4 @@
-package MCS_Server
+package main
 
 import (
 	"MCS_Server/core"
@@ -9,4 +9,5 @@ import (
 func main() {
 	global.MCS_Viper = core.Viper()
 	global.MCS_DB = initialize.Gorm()
+	core.RunServer()
 }
