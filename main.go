@@ -8,9 +8,10 @@ import (
 
 func main() {
 	global.MCS_Viper = core.Viper()
+	global.MCS_Log = core.Zap()
 	global.MCS_DB = initialize.Gorm()
-	if global.MCS_DB != nil{
-		db,_ := global.MCS_DB.DB()
+	if global.MCS_DB != nil {
+		db, _ := global.MCS_DB.DB()
 		defer db.Close()
 	}
 	core.RunServer()
