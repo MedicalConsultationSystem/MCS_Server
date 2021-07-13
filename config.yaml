@@ -1,3 +1,6 @@
+information:
+  port: 23333
+
 mysql:
   path: '127.0.0.1'
   config: 'charset=utf8mb4&parseTime=false&loc=Local'

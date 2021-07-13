@@ -14,4 +14,5 @@ var (
 
 const (
 	ConfigName = "config"
+	ConfigFile = "config.yaml"
 )
