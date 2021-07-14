@@ -1,5 +1,6 @@
 package request
 
 type Login struct {
-	Username string `json:"username"`
+	Code string `json:"code"`
+	PhoneNo string `json:"phone_no"`
 }
