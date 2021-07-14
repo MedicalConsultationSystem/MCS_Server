@@ -21,7 +21,7 @@ func AddOrg(c *gin.Context) {
 	org := model.BaseOrg{OrgName: newOrgMsg.OrgName}
 	if err := service.AddOrg(org);err != nil{
 		global.MCS_Log.Error("机构添加失败",zap.Any("err", err))
-		response.FailWithMsg("机构添加失败",c)
+		response.FailWithMsg(err.Error(),c)
 	}else {
 		response.SuccessWithMsg("机构添加成功",c)
 	}

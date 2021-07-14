@@ -13,6 +13,7 @@ func Routers() *gin.Engine {
 	{
 		router.InitUserRouter(routerGroup)
 		router.InitOrgRouter(routerGroup)
+		router.InitDeptRouter(routerGroup)
 	}
 
 	return Router
