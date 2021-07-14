@@ -1,6 +1,6 @@
 package model
 
-type SysDoctor struct {
+type BaseDoctor struct {
 	DoctorId   string `json:"doctor_id"`
 	DoctorName string `json:"doctor_name"`
 	OrgId      int    `json:"org_id"`
@@ -10,4 +10,8 @@ type SysDoctor struct {
 	AvatarUrl  string `json:"avatar_url"`
 	LevelCode  string `json:"level_code"`
 	LevelName  string `json:"level_name"`
+}
+
+func (m *BaseDoctor) TableName() string {
+	return "base_doctor"
 }

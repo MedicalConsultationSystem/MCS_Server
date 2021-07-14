@@ -2,7 +2,7 @@ package model
 
 import "time"
 
-type SysAccount struct {
+type BaseAccount struct {
 	Code string
 	PhoneNo string
 	MiniOpenId string

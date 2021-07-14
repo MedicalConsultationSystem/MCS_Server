@@ -19,7 +19,7 @@ func Login(c *gin.Context) {
 		response.FailWithMsg(err.Error(), c)
 		return
 	}
-	a := &model.SysAccount{Code: loginMsg.Code,PhoneNo: loginMsg.PhoneNo}
+	a := &model.BaseAccount{Code: loginMsg.Code,PhoneNo: loginMsg.PhoneNo}
 	if err,account := service.Login(a);err !=nil{
 		global.MCS_Log.Error("登陆失败!",zap.Any("err", err))
 	}else {

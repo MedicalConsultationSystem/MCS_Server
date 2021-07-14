@@ -4,8 +4,8 @@ import (
 	"MCS_Server/model"
 )
 
-func Login(a *model.SysAccount) (err error, accountInter *model.SysAccount) {
-	var account model.SysAccount
+func Login(a *model.BaseAccount) (err error, accountInter *model.BaseAccount) {
+	var account model.BaseAccount
 	//err = global.MCS_DB.Where()
 	return err,&account
 }
