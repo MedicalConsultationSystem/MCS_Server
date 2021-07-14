@@ -1,9 +1,8 @@
 package verify
 
 import (
-	"fmt"
-	"reflect"
 	"errors"
+	"reflect"
 )
 
 type Rules map[string][]string
@@ -15,8 +14,6 @@ const (
 func Verify(rqm interface{},roleMap Rules)(err error){
 	typ := reflect.TypeOf(rqm)
 	val := reflect.ValueOf(rqm)
-	fmt.Println(typ)
-	fmt.Println(val)
 	kd := val.Kind()
 	if kd != reflect.Struct {
 		return errors.New("expect struct")
@@ -24,10 +21,10 @@ func Verify(rqm interface{},roleMap Rules)(err error){
 	num := val.NumField()
 	for i :=0;i<num;i++{
 		itemType := typ.Field(i)
-		itemValue := val.Field(i)
+		val := val.Field(i)
 		if len(roleMap[itemType.Name]) >0{
 			for _,v :=range roleMap[itemType.Name]{
-				if v == "NotEmpty" && isBlank(itemValue){
+				if v == "NotEmpty" && isBlank(val){
 					return errors.New(itemType.Name + "值不能为空")
 				}
 			}

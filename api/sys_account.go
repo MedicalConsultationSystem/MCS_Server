@@ -17,11 +17,11 @@ func Login(c *gin.Context) {
 	_ = c.ShouldBindJSON(&loginMsg)
 	if err:=verify.Verify(loginMsg,verify.LoginVerify);err != nil{
 		response.FailWithMsg(err.Error(), c)
+		return
 	}
 	a := &model.SysAccount{Code: loginMsg.Code,PhoneNo: loginMsg.PhoneNo}
 	if err,account := service.Login(a);err !=nil{
 		global.MCS_Log.Error("登陆失败!",zap.Any("err", err))
-
 	}else {
 		fmt.Println(account)
 	}

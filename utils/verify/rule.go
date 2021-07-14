@@ -1,5 +1,6 @@
 package verify
 
 var (
-	LoginVerify = Rules{"Username":{NotEmpty}}
+	LoginVerify  = Rules{"Code": {NotEmpty},"Phone":{NotEmpty}}
+	AddOrgVerify = Rules{"OrgName": {NotEmpty}}
 )
