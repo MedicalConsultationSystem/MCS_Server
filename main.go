@@ -6,6 +6,13 @@ import (
 	"MCS_Server/initialize"
 )
 
+// @title Swagger Example API
+// @version 0.0.1
+// @description This is a sample Server pets
+// @securityDefinitions.apikey ApiKeyAuth
+// @in header
+// @name x-token
+// @BasePath /
 func main() {
 	global.MCS_Viper = core.Viper()
 	global.MCS_Log = core.Zap()
