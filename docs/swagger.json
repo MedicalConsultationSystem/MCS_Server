@@ -372,6 +372,41 @@
                 }
             }
         },
+        "/organization/deleteOrg": {
+            "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "机构"
+                ],
+                "summary": "根据传入的机构结构体删除数据库中对应机构信息",
+                "parameters": [
+                    {
+                        "description": "数据库中机构结构体",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.BaseOrg"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"机构信息删除成功\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/organization/listAll": {
             "get": {
                 "security": [
@@ -432,6 +467,17 @@
                     "type": "string"
                 },
                 "trade_name": {
+                    "type": "string"
+                }
+            }
+        },
+        "model.BaseOrg": {
+            "type": "object",
+            "properties": {
+                "org_id": {
+                    "type": "integer"
+                },
+                "org_name": {
                     "type": "string"
                 }
             }

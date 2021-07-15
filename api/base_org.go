@@ -50,3 +50,22 @@ func ListAllOrg(c *gin.Context) {
 		response.SuccessWithAll(data,"机构信息获取成功",c)
 	}
 }
+
+
+// @Tags 机构
+// @Summary 根据传入的机构结构体删除数据库中对应机构信息
+// @Security ApiKeyAuth
+// @Produce application/json
+// @Param data body model.BaseOrg true "数据库中机构结构体"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"机构信息删除成功"}"
+// @Router /organization/deleteOrg [delete]
+func DeleteOrg(c *gin.Context) {
+	var baseOrg model.BaseOrg
+	_ = c.ShouldBindJSON(&baseOrg)
+	if err := service.DeleteOrg(baseOrg);err != nil{
+		global.MCS_Log.Error("机构信息删除失败",zap.Any("err",err))
+		response.FailWithMsg("机构信息删除失败:"+err.Error(),c)
+	}else {
+		response.SuccessWithMsg("机构信息删除成功",c)
+	}
+}

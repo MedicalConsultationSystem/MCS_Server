@@ -18,3 +18,7 @@ func ListAllOrg() (err error,orgs []model.BaseOrg) {
 	err = global.MCS_DB.Model(&model.BaseOrg{}).Find(&orgs).Error
 	return
 }
+
+func DeleteOrg(org model.BaseOrg) error {
+	return global.MCS_DB.Where("org_id = ?",org.OrgId).Delete(&org).Error
+}

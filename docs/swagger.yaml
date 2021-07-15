@@ -25,6 +25,13 @@ definitions:
       trade_name:
         type: string
     type: object
+  model.BaseOrg:
+    properties:
+      org_id:
+        type: integer
+      org_name:
+        type: string
+    type: object
   request.AddDept:
     properties:
       dept_name:
@@ -316,6 +323,27 @@ paths:
       security:
       - ApiKeyAuth: []
       summary: 增加一个机构
+      tags:
+      - 机构
+  /organization/deleteOrg:
+    delete:
+      parameters:
+      - description: 数据库中机构结构体
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/model.BaseOrg'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"success":true,"data":{},"msg":"机构信息删除成功"}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 根据传入的机构结构体删除数据库中对应机构信息
       tags:
       - 机构
   /organization/listAll:
