@@ -86,6 +86,44 @@ var doc = `{
                 }
             }
         },
+        "/drug/add": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "药物"
+                ],
+                "summary": "增加一种药物",
+                "parameters": [
+                    {
+                        "description": "药物通用名称,商品名,拼音码,药品规格,包装单位,药品价格,剂量,剂量单位,产地,批准文号",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/request.AddDrug"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"药物添加成功\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/drug/listAll": {
             "get": {
                 "security": [
@@ -178,6 +216,41 @@ var doc = `{
             "type": "object",
             "properties": {
                 "dept_name": {
+                    "type": "string"
+                }
+            }
+        },
+        "request.AddDrug": {
+            "type": "object",
+            "properties": {
+                "approval_number": {
+                    "type": "string"
+                },
+                "dose": {
+                    "type": "number"
+                },
+                "dose_unit": {
+                    "type": "string"
+                },
+                "drug_name": {
+                    "type": "string"
+                },
+                "factory_name": {
+                    "type": "string"
+                },
+                "pack_unit": {
+                    "type": "string"
+                },
+                "pinyin_code": {
+                    "type": "string"
+                },
+                "price": {
+                    "type": "number"
+                },
+                "specification": {
+                    "type": "string"
+                },
+                "trade_name": {
                     "type": "string"
                 }
             }
