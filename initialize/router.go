@@ -1,7 +1,6 @@
 package initialize
 
 import (
-	"MCS_Server/middleware"
 	"MCS_Server/router"
 	_ "MCS_Server/router"
 	"github.com/gin-gonic/gin"
@@ -9,7 +8,7 @@ import (
 
 func Routers() *gin.Engine {
 	Router:= gin.Default()
-	Router.Use(middleware.Cors())
+	//Router.Use(middleware.Cors())
 	routerGroup := Router.Group("")
 	{
 		router.InitUserRouter(routerGroup)
