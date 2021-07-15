@@ -49,3 +49,21 @@ func ListAllDept(c *gin.Context) {
 		response.SuccessWithAll(data,"科室信息获取成功",c)
 	}
 }
+
+// @Tags 科室
+// @Summary 根据传入的科室结构体删除数据库中对应科室信息
+// @Security ApiKeyAuth
+// @Produce application/json
+// @Param data body model.BaseDept true "数据库中科室结构体"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"科室信息删除成功"}"
+// @Router /dept/deleteDept [delete]
+func DeleteDept(c *gin.Context) {
+	var baseDept model.BaseDept
+	_ = c.ShouldBindJSON(&baseDept)
+	if err := service.DeleteDept(baseDept);err != nil{
+		global.MCS_Log.Error("科室信息删除失败",zap.Any("err",err))
+		response.FailWithMsg("科室信息删除失败:"+err.Error(),c)
+	}else {
+		response.SuccessWithMsg("科室信息删除成功",c)
+	}
+}

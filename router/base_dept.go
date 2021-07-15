@@ -10,5 +10,6 @@ func InitDeptRouter(Router *gin.RouterGroup)  {
 	{
 		deptRouter.POST("add",api.AddDept)
 		deptRouter.GET("listAll",api.ListAllDept)
+		deptRouter.DELETE("deleteDept",api.DeleteDept)
 	}
 }

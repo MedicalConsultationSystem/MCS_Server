@@ -1,5 +1,12 @@
 basePath: /
 definitions:
+  model.BaseDept:
+    properties:
+      dept_id:
+        type: integer
+      dept_name:
+        type: string
+    type: object
   model.BaseDrug:
     properties:
       approval_number:
@@ -128,6 +135,27 @@ paths:
       security:
       - ApiKeyAuth: []
       summary: 增加一个科室
+      tags:
+      - 科室
+  /dept/deleteDept:
+    delete:
+      parameters:
+      - description: 数据库中科室结构体
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/model.BaseDept'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"success":true,"data":{},"msg":"科室信息删除成功"}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 根据传入的科室结构体删除数据库中对应科室信息
       tags:
       - 科室
   /dept/listAll:

@@ -62,6 +62,41 @@ var doc = `{
                 }
             }
         },
+        "/dept/deleteDept": {
+            "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "科室"
+                ],
+                "summary": "根据传入的科室结构体删除数据库中对应科室信息",
+                "parameters": [
+                    {
+                        "description": "数据库中科室结构体",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.BaseDept"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"科室信息删除成功\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/dept/listAll": {
             "get": {
                 "security": [
@@ -449,6 +484,17 @@ var doc = `{
         }
     },
     "definitions": {
+        "model.BaseDept": {
+            "type": "object",
+            "properties": {
+                "dept_id": {
+                    "type": "integer"
+                },
+                "dept_name": {
+                    "type": "string"
+                }
+            }
+        },
         "model.BaseDrug": {
             "type": "object",
             "properties": {

@@ -18,3 +18,7 @@ func ListAllDept()(err error,depts []model.BaseDept)  {
 	err = global.MCS_DB.Model(&model.BaseDept{}).Find(&depts).Error
 	return
 }
+
+func DeleteDept(dept model.BaseDept) error {
+	return global.MCS_DB.Where("dept_id = ?",dept.DeptId).Delete(&dept).Error
+}
