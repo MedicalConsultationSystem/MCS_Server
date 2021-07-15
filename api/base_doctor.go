@@ -22,7 +22,7 @@ func ListAllDoctor(c *gin.Context) {
 		global.MCS_Log.Error("医生信息获取失败", zap.Any("err", err))
 		response.FailWithMsg("医生信息获取失败:"+err.Error(), c)
 	} else {
-		response.SuccessWithAll(data, "药物信息获取成功", c)
+		response.SuccessWithAll(data, "医生信息获取成功", c)
 	}
 }
 
