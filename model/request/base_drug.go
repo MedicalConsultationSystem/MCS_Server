@@ -12,3 +12,11 @@ type AddDrug struct {
 	FactoryName    string  `json:"factory_name"`
 	ApprovalNumber string  `json:"approval_number"`
 }
+
+type FindDrugByPinyin struct {
+	Pinyin string `json:"pinyin"`
+}
+
+type FindDrugByName struct {
+	DrugName string `json:"drug_name"`
+}

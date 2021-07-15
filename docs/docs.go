@@ -186,6 +186,76 @@ var doc = `{
                 }
             }
         },
+        "/drug/findByName": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "药物"
+                ],
+                "summary": "根据名称模糊查询药物",
+                "parameters": [
+                    {
+                        "description": "药物名称",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/request.FindDrugByName"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"药物信息获取成功\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/drug/findByPinyin": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "药物"
+                ],
+                "summary": "根据拼音代码模糊查询药物",
+                "parameters": [
+                    {
+                        "description": "药物拼音",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/request.FindDrugByPinyin"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"药物信息获取成功\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/drug/listAll": {
             "get": {
                 "security": [
@@ -353,6 +423,22 @@ var doc = `{
             "type": "object",
             "properties": {
                 "org_name": {
+                    "type": "string"
+                }
+            }
+        },
+        "request.FindDrugByName": {
+            "type": "object",
+            "properties": {
+                "drug_name": {
+                    "type": "string"
+                }
+            }
+        },
+        "request.FindDrugByPinyin": {
+            "type": "object",
+            "properties": {
+                "pinyin": {
                     "type": "string"
                 }
             }

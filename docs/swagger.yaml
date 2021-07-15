@@ -54,6 +54,16 @@ definitions:
       org_name:
         type: string
     type: object
+  request.FindDrugByName:
+    properties:
+      drug_name:
+        type: string
+    type: object
+  request.FindDrugByPinyin:
+    properties:
+      pinyin:
+        type: string
+    type: object
 info:
   contact: {}
   description: MCS_Server API 接口文档
@@ -155,6 +165,48 @@ paths:
       security:
       - ApiKeyAuth: []
       summary: 增加一种药物
+      tags:
+      - 药物
+  /drug/findByName:
+    post:
+      parameters:
+      - description: 药物名称
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/request.FindDrugByName'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"success":true,"data":{},"msg":"药物信息获取成功"}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 根据名称模糊查询药物
+      tags:
+      - 药物
+  /drug/findByPinyin:
+    post:
+      parameters:
+      - description: 药物拼音
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/request.FindDrugByPinyin'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"success":true,"data":{},"msg":"药物信息获取成功"}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 根据拼音代码模糊查询药物
       tags:
       - 药物
   /drug/listAll:

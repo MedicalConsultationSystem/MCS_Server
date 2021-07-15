@@ -54,3 +54,39 @@ func AddDrug(c *gin.Context) {
 	}
 
 }
+
+// @Tags 药物
+// @Summary 根据拼音代码模糊查询药物
+// @Security ApiKeyAuth
+// @Produce application/json
+// @Param data body request.FindDrugByPinyin true "药物拼音"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"药物信息获取成功"}"
+// @Router /drug/findByPinyin [post]
+func FindDrugByPinyin(c *gin.Context) {
+	var msg request.FindDrugByPinyin
+	_ = c.ShouldBindJSON(&msg)
+	if err,data := service.FindDrugByPinyin(msg.Pinyin);err !=nil{
+		global.MCS_Log.Error("药物信息获取失败",zap.Any("err",err))
+		response.FailWithMsg("药物信息获取失败:"+err.Error(),c)
+	}else {
+		response.SuccessWithAll(data,"药物信息获取成功",c)
+	}
+}
+
+// @Tags 药物
+// @Summary 根据名称模糊查询药物
+// @Security ApiKeyAuth
+// @Produce application/json
+// @Param data body request.FindDrugByName true "药物名称"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"药物信息获取成功"}"
+// @Router /drug/findByName [post]
+func FindDrugByName(c *gin.Context) {
+	var msg request.FindDrugByName
+	_ = c.ShouldBindJSON(&msg)
+	if err,data := service.FindDrugByName(msg.DrugName);err !=nil{
+		global.MCS_Log.Error("药物信息获取失败",zap.Any("err",err))
+		response.FailWithMsg("药物信息获取失败:"+err.Error(),c)
+	}else {
+		response.SuccessWithAll(data,"药物信息获取成功",c)
+	}
+}

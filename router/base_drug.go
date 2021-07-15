@@ -10,5 +10,7 @@ func InitDrugRouter(Router *gin.RouterGroup){
 	{
 		drugRouter.GET("listAll",api.ListAllDrug)
 		drugRouter.POST("add",api.AddDrug)
+		drugRouter.POST("findByPinyin",api.FindDrugByPinyin)
+		drugRouter.POST("findByName",api.FindDrugByName)
 	}
 }

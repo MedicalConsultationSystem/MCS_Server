@@ -18,3 +18,13 @@ func AddDrug(drug model.BaseDrug) error {
 	}
 	return global.MCS_DB.Create(&drug).Error
 }
+
+func FindDrugByPinyin(pinyin string) (err error, drugs []model.BaseDrug) {
+	err = global.MCS_DB.Model(&model.BaseDrug{}).Where("pinyin_code LIKE ?","%"+pinyin+"%").Find(&drugs).Error
+	return
+}
+
+func FindDrugByName(drugName string)(err error, drugs []model.BaseDrug) {
+	err = global.MCS_DB.Model(&model.BaseDrug{}).Where("drug_name LIKE ?","%"+drugName+"%").Find(&drugs).Error
+	return
+}
