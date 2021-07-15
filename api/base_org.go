@@ -11,6 +11,15 @@ import (
 	"go.uber.org/zap"
 )
 
+
+// @Tags 机构
+// @Summary 增加一个机构
+// @Security ApiKeyAuth
+// @accept application/json
+// @Produce application/json
+// @Param data body request.AddOrg true "机构名称"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"机构添加成功"}"
+// @Router /organization/add [post]
 func AddOrg(c *gin.Context) {
 	var newOrgMsg request.AddOrg
 	_ = c.ShouldBindJSON(&newOrgMsg)
@@ -27,6 +36,12 @@ func AddOrg(c *gin.Context) {
 	}
 }
 
+// @Tags 机构
+// @Summary 获取所有机构
+// @Security ApiKeyAuth
+// @Produce application/json
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"机构信息获取成功"}"
+// @Router /organization/listAll [get]
 func ListAllOrg(c *gin.Context) {
 	if err,data := service.ListAllOrg();err != nil{
 		global.MCS_Log.Error("机构信息获取失败",zap.Any("err", err))

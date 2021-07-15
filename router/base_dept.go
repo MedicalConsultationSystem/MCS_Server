@@ -9,6 +9,6 @@ func InitDeptRouter(Router *gin.RouterGroup)  {
 	deptRouter := Router.Group("dept")
 	{
 		deptRouter.POST("add",api.AddDept)
-		deptRouter.GET("listall",api.ListAllDept)
+		deptRouter.GET("listAll",api.ListAllDept)
 	}
 }

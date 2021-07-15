@@ -11,6 +11,14 @@ import (
 	"go.uber.org/zap"
 )
 
+// @Tags 科室
+// @Summary 增加一个科室
+// @Security ApiKeyAuth
+// @accept application/json
+// @Produce application/json
+// @Param data body request.AddDept true "科室名称"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"科室添加成功"}"
+// @Router /dept/add [post]
 func AddDept(c *gin.Context){
 	var newDeptMsg request.AddDept
 	_ = c.ShouldBindJSON(&newDeptMsg)
@@ -27,6 +35,12 @@ func AddDept(c *gin.Context){
 	}
 }
 
+// @Tags 科室
+// @Summary 获取所有科室
+// @Security ApiKeyAuth
+// @Produce application/json
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"科室信息获取成功"}"
+// @Router /dept/listAll [get]
 func ListAllDept(c *gin.Context) {
 	if err,data := service.ListAllDept();err!=nil{
 		global.MCS_Log.Error("科室信息获取失败",zap.Any("err",err))

@@ -9,6 +9,6 @@ func InitOrgRouter(Router *gin.RouterGroup){
 	orgRouter := Router.Group("organization")
 	{
 		orgRouter.POST("add",api.AddOrg)
-		orgRouter.GET("listall",api.ListAllOrg)
+		orgRouter.GET("listAll",api.ListAllOrg)
 	}
 }
