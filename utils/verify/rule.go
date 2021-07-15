@@ -7,4 +7,6 @@ var (
 	AddDrugVerify = Rules{"DrugName": {NotEmpty}, "TradeName": {NotEmpty},
 		"PinyinCode": {NotEmpty}, "Specification": {NotEmpty}, "PackUnit": {NotEmpty},
 		"Price": {NotEmpty}, "Dose": {NotEmpty}, "DoseUnit": {NotEmpty}}
+	AddDoctorVerify = Rules{"DoctorId":{NotEmpty},"DoctorName":{NotEmpty},
+		"OrgId":{NotEmpty},"OrgName":{NotEmpty},"DeptId":{NotEmpty},"DeptName":{NotEmpty}}
 )

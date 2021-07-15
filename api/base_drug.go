@@ -14,8 +14,8 @@ import (
 
 
 // @Tags 药物
-//@Summary 获取所有药物信息
-//@Security ApiKeyAuth
+// @Summary 获取所有药物信息
+// @Security ApiKeyAuth
 // @Produce application/json
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"药物信息获取成功"}"
 // @Router /drug/listAll [get]

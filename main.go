@@ -6,9 +6,9 @@ import (
 	"MCS_Server/initialize"
 )
 
-// @title Swagger Example API
+// @title Swagger MCS_Server API
 // @version 0.0.1
-// @description This is a sample Server pets
+// @description MCS_Server API 接口文档
 // @securityDefinitions.apikey ApiKeyAuth
 // @in header
 // @name x-token

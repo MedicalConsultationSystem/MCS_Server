@@ -21,6 +21,7 @@ func Routers() *gin.Engine {
 		router.InitOrgRouter(routerGroup)
 		router.InitDeptRouter(routerGroup)
 		router.InitDrugRouter(routerGroup)
+		router.InitDoctorRouter(routerGroup)
 	}
 
 	return Router

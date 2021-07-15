@@ -86,6 +86,68 @@ var doc = `{
                 }
             }
         },
+        "/doctor/add": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "医生"
+                ],
+                "summary": "注册医生信息",
+                "parameters": [
+                    {
+                        "description": "医生id，医生姓名，机构id，机构名称，科室id，科室名称，医生头像链接，医生职称代码，医生职称",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/request.AddDoctor"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"医生注册成功\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/doctor/listAll": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "医生"
+                ],
+                "summary": "获取所有医生信息",
+                "responses": {
+                    "200": {
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"医生信息获取成功\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/drug/add": {
             "post": {
                 "security": [
@@ -220,6 +282,38 @@ var doc = `{
                 }
             }
         },
+        "request.AddDoctor": {
+            "type": "object",
+            "properties": {
+                "avatar_url": {
+                    "type": "string"
+                },
+                "dept_id": {
+                    "type": "integer"
+                },
+                "dept_name": {
+                    "type": "string"
+                },
+                "doctor_id": {
+                    "type": "string"
+                },
+                "doctor_name": {
+                    "type": "string"
+                },
+                "level_code": {
+                    "type": "string"
+                },
+                "level_name": {
+                    "type": "string"
+                },
+                "org_id": {
+                    "type": "integer"
+                },
+                "org_name": {
+                    "type": "string"
+                }
+            }
+        },
         "request.AddDrug": {
             "type": "object",
             "properties": {
@@ -288,8 +382,8 @@ var SwaggerInfo = swaggerInfo{
 	Host:        "",
 	BasePath:    "/",
 	Schemes:     []string{},
-	Title:       "Swagger Example API",
-	Description: "This is a sample Server pets",
+	Title:       "Swagger MCS_Server API",
+	Description: "MCS_Server API 接口文档",
 }
 
 type s struct{}
