@@ -52,3 +52,22 @@ func AddDoctor(c *gin.Context) {
 		response.SuccessWithMsg("医生注册成功",c)
 	}
 }
+
+
+// @Tags 医生
+// @Summary 根据姓名模糊查询医生
+// @Security ApiKeyAuth
+// @Produce application/json
+// @Param data body request.FindDoctorByName true "医生姓名"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"医生信息获取成功"}"
+// @Router /doctor/findByName [post]
+func FindDoctorByName(c *gin.Context){
+	var msg request.FindDoctorByName
+	_  = c.ShouldBindJSON(&msg)
+	if err,data := service.FindDoctorByName(msg.DoctorName);err != nil{
+		global.MCS_Log.Error("医生信息获取失败",zap.Any("err",err))
+		response.FailWithMsg("医生信息获取失败:"+err.Error(),c)
+	}else {
+		response.SuccessWithAll(data,"医生信息获取成功",c)
+	}
+}

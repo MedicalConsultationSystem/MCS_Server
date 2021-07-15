@@ -11,3 +11,7 @@ type AddDoctor struct {
 	LevelCode  string `json:"level_code"`
 	LevelName  string `json:"level_name"`
 }
+
+type FindDoctorByName struct {
+	DoctorName string `json:"doctor_name"`
+}

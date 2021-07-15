@@ -10,5 +10,6 @@ func InitDoctorRouter(Router *gin.RouterGroup){
 	{
 		doctorRouter.GET("listAll",api.ListAllDoctor)
 		doctorRouter.POST("add",api.AddDoctor)
+		doctorRouter.POST("findByName",api.FindDoctorByName)
 	}
 }

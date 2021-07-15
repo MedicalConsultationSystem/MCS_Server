@@ -124,6 +124,41 @@ var doc = `{
                 }
             }
         },
+        "/doctor/findByName": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "医生"
+                ],
+                "summary": "根据姓名模糊查询医生",
+                "parameters": [
+                    {
+                        "description": "医生姓名",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/request.FindDoctorByName"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"医生信息获取成功\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/doctor/listAll": {
             "get": {
                 "security": [
@@ -423,6 +458,14 @@ var doc = `{
             "type": "object",
             "properties": {
                 "org_name": {
+                    "type": "string"
+                }
+            }
+        },
+        "request.FindDoctorByName": {
+            "type": "object",
+            "properties": {
+                "doctor_name": {
                     "type": "string"
                 }
             }

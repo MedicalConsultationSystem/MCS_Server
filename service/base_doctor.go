@@ -18,3 +18,8 @@ func AddDoctor(doctor model.BaseDoctor) error {
 	}
 	return global.MCS_DB.Create(&doctor).Error
 }
+
+func FindDoctorByName(doctorName string) (err error,doctors []model.BaseDoctor){
+	err = global.MCS_DB.Model(&model.BaseDoctor{}).Where("doctor_name LIKE ?","%"+doctorName+"%").Find(&doctors).Error
+	return
+}
