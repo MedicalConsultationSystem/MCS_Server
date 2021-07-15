@@ -12,5 +12,6 @@ func InitDrugRouter(Router *gin.RouterGroup){
 		drugRouter.POST("add",api.AddDrug)
 		drugRouter.POST("findByPinyin",api.FindDrugByPinyin)
 		drugRouter.POST("findByName",api.FindDrugByName)
+		drugRouter.DELETE("deleteDrug",api.DeleteDrug)
 	}
 }

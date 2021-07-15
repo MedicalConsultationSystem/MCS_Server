@@ -28,3 +28,7 @@ func FindDrugByName(drugName string)(err error, drugs []model.BaseDrug) {
 	err = global.MCS_DB.Model(&model.BaseDrug{}).Where("drug_name LIKE ?","%"+drugName+"%").Find(&drugs).Error
 	return
 }
+
+func DeleteDrug(drug model.BaseDrug) error {
+	return global.MCS_DB.Where("drug_id = ?",drug.DrugId).Delete(&drug).Error
+}

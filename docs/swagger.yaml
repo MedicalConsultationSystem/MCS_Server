@@ -1,5 +1,30 @@
 basePath: /
 definitions:
+  model.BaseDrug:
+    properties:
+      approval_number:
+        type: string
+      dose:
+        type: number
+      dose_unit:
+        type: string
+      drug_id:
+        type: integer
+      drug_name:
+        type: string
+      factory_name:
+        type: string
+      pack_unit:
+        type: string
+      pinyin_code:
+        type: string
+      price:
+        type: number
+      specification:
+        type: string
+      trade_name:
+        type: string
+    type: object
   request.AddDept:
     properties:
       dept_name:
@@ -191,6 +216,27 @@ paths:
       security:
       - ApiKeyAuth: []
       summary: 增加一种药物
+      tags:
+      - 药物
+  /drug/deleteDrug:
+    delete:
+      parameters:
+      - description: 数据库中药物结构体
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/model.BaseDrug'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"success":true,"data":{},"msg":"药物信息删除成功"}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 根据传入的药物结构体删除数据库中对应药物信息
       tags:
       - 药物
   /drug/findByName:
