@@ -53,6 +53,20 @@ paths:
       summary: 获取所有科室
       tags:
       - 科室
+  /drug/listAll:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"success":true,"data":{},"msg":"药物信息获取成功"}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 获取所有药物信息
+      tags:
+      - 药物
   /organization/add:
     post:
       consumes:
