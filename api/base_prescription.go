@@ -39,3 +39,14 @@ func AddPrescription(c *gin.Context){
 	}
 }
 
+// @Tags 处方
+// @Summary 提交所有处方
+// @Security ApiKeyAuth
+// @accept application/json
+// @Produce application/json
+// @Param data body request.SubmitPrescription true "机构id，用户id，问诊信息id，处方类型，医生id，医生名称"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"处方提交成功"}"
+// @Router /prescription/submit [post]
+func SubmitPrescription(c *gin.Context){
+	response.SuccessWithMsg("接口还没写完，让你失望了",c)
+}

@@ -9,5 +9,6 @@ func InitPrescriptionRouter(Router *gin.RouterGroup) {
 	prescription := Router.Group("prescription")
 	{
 		prescription.POST("add",api.AddPrescription)
+		prescription.POST("submit",api.SubmitPrescription)
 	}
 }

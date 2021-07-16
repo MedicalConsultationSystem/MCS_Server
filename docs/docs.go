@@ -675,6 +675,44 @@ var doc = `{
                     }
                 }
             }
+        },
+        "/prescription/submit": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "处方"
+                ],
+                "summary": "提交所有处方",
+                "parameters": [
+                    {
+                        "description": "机构id，用户id，问诊信息id，处方类型，医生id，医生名称",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/request.SubmitPrescription"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"处方提交成功\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -947,6 +985,90 @@ var doc = `{
             "properties": {
                 "pinyin": {
                     "type": "string"
+                }
+            }
+        },
+        "request.Prescription": {
+            "type": "object",
+            "properties": {
+                "drugs": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/request.PrescriptionDrug"
+                    }
+                },
+                "prescription_id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "request.PrescriptionDrug": {
+            "type": "object",
+            "properties": {
+                "dose": {
+                    "type": "number"
+                },
+                "dose_unit": {
+                    "type": "string"
+                },
+                "drug_id": {
+                    "type": "integer"
+                },
+                "drug_name": {
+                    "type": "string"
+                },
+                "frequency_code": {
+                    "type": "integer"
+                },
+                "frequency_name": {
+                    "type": "string"
+                },
+                "group_number": {
+                    "type": "integer"
+                },
+                "org_id": {
+                    "type": "integer"
+                },
+                "pack_unit": {
+                    "type": "string"
+                },
+                "prescription_id": {
+                    "type": "integer"
+                },
+                "price": {
+                    "type": "number"
+                },
+                "quantity": {
+                    "type": "number"
+                },
+                "remark": {
+                    "type": "string"
+                },
+                "sort_number": {
+                    "type": "integer"
+                },
+                "specification": {
+                    "type": "string"
+                },
+                "take_days": {
+                    "type": "integer"
+                },
+                "usage_code": {
+                    "type": "integer"
+                },
+                "usage_name": {
+                    "type": "string"
+                }
+            }
+        },
+        "request.SubmitPrescription": {
+            "type": "object",
+            "properties": {
+                "prescription": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/request.Prescription"
+                    }
                 }
             }
         }

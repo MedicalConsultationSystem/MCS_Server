@@ -177,6 +177,61 @@ definitions:
       pinyin:
         type: string
     type: object
+  request.Prescription:
+    properties:
+      drugs:
+        items:
+          $ref: '#/definitions/request.PrescriptionDrug'
+        type: array
+      prescription_id:
+        type: integer
+    type: object
+  request.PrescriptionDrug:
+    properties:
+      dose:
+        type: number
+      dose_unit:
+        type: string
+      drug_id:
+        type: integer
+      drug_name:
+        type: string
+      frequency_code:
+        type: integer
+      frequency_name:
+        type: string
+      group_number:
+        type: integer
+      org_id:
+        type: integer
+      pack_unit:
+        type: string
+      prescription_id:
+        type: integer
+      price:
+        type: number
+      quantity:
+        type: number
+      remark:
+        type: string
+      sort_number:
+        type: integer
+      specification:
+        type: string
+      take_days:
+        type: integer
+      usage_code:
+        type: integer
+      usage_name:
+        type: string
+    type: object
+  request.SubmitPrescription:
+    properties:
+      prescription:
+        items:
+          $ref: '#/definitions/request.Prescription'
+        type: array
+    type: object
 info:
   contact: {}
   description: MCS_Server API 接口文档
@@ -571,6 +626,29 @@ paths:
       security:
       - ApiKeyAuth: []
       summary: 增加一个处方
+      tags:
+      - 处方
+  /prescription/submit:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 机构id，用户id，问诊信息id，处方类型，医生id，医生名称
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/request.SubmitPrescription'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"success":true,"data":{},"msg":"处方提交成功"}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 提交所有处方
       tags:
       - 处方
 securityDefinitions:
