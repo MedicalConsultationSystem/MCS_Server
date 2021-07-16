@@ -25,7 +25,7 @@ func AddConsult(c *gin.Context)  {
 	var newConsultMsg request.AddConsult
 	_ = c.ShouldBindJSON(&newConsultMsg)
 	fmt.Println(newConsultMsg)
-	if err := verify.Verify(newConsultMsg,verify.AddConsult);err != nil{
+	if err := verify.Verify(newConsultMsg,verify.AddConsultVerify);err != nil{
 		response.FailWithMsg(err.Error(),c)
 		return
 	}

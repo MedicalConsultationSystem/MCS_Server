@@ -621,6 +621,44 @@
                     }
                 }
             }
+        },
+        "/prescription/add": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "处方"
+                ],
+                "summary": "增加一个处方",
+                "parameters": [
+                    {
+                        "description": "机构id，用户id，问诊信息id，处方类型，医生id，医生名称",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/request.AddPrescription"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"处方新增成功\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -837,6 +875,29 @@
             "type": "object",
             "properties": {
                 "org_name": {
+                    "type": "string"
+                }
+            }
+        },
+        "request.AddPrescription": {
+            "type": "object",
+            "properties": {
+                "consult_id": {
+                    "type": "integer"
+                },
+                "doctor_id": {
+                    "type": "string"
+                },
+                "doctor_name": {
+                    "type": "string"
+                },
+                "org_id": {
+                    "type": "integer"
+                },
+                "prescription_type": {
+                    "type": "string"
+                },
+                "user_id": {
                     "type": "string"
                 }
             }
