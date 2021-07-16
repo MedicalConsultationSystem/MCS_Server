@@ -35,5 +35,10 @@ func DeleteDrug(drug model.BaseDrug) error {
 
 func ListAllUsage() (err error,usages []model.BaseUsage) {
 	err = global.MCS_DB.Model(&model.BaseUsage{}).Find(&usages).Error
-	return 
+	return
+}
+
+func ListAllFrequency() (err error,frequencies []model.BaseFrequency){
+	err = global.MCS_DB.Model(&model.BaseFrequency{}).Find(&frequencies).Error
+	return
 }

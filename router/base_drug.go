@@ -18,5 +18,9 @@ func InitDrugRouter(Router *gin.RouterGroup){
 	{
 		drugUsageRouter.GET("listAll",api.ListAllUsage)
 	}
+	drugFrequencyRouter := drugRouter.Group("frequency")
+	{
+		drugFrequencyRouter.GET("listAll",api.ListAllFrequency)
 
+	}
 }

@@ -123,3 +123,18 @@ func ListAllUsage(c *gin.Context){
 		response.SuccessWithAll(data,"药物用法信息获取成功",c)
 	}
 }
+
+// @Tags 药物
+// @Summary 获取所有药物频次信息
+// @Security ApiKeyAuth
+// @Produce application/json
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"药物频次信息获取成功"}"
+// @Router /drug/frequency/listAll [get]
+func ListAllFrequency( c*gin.Context){
+	if err,data := service.ListAllFrequency();err!=nil{
+		global.MCS_Log.Error("药物频次信息获取失败",zap.Any("err",err))
+		response.FailWithMsg("药物频次信息获取失败:"+err.Error(),c)
+	}else {
+		response.SuccessWithAll(data,"药物频次信息获取成功",c)
+	}
+}

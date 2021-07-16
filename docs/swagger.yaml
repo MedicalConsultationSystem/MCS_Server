@@ -337,6 +337,20 @@ paths:
       summary: 根据拼音代码模糊查询药物
       tags:
       - 药物
+  /drug/frequency/listAll:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"success":true,"data":{},"msg":"药物频次信息获取成功"}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 获取所有药物频次信息
+      tags:
+      - 药物
   /drug/listAll:
     get:
       produces:
