@@ -177,6 +177,11 @@ definitions:
       pinyin:
         type: string
     type: object
+  request.ListPrescription:
+    properties:
+      consult_id:
+        type: integer
+    type: object
   request.Prescription:
     properties:
       drugs:
@@ -626,6 +631,29 @@ paths:
       security:
       - ApiKeyAuth: []
       summary: 增加一个处方
+      tags:
+      - 处方
+  /prescription/list:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 问诊信息 id
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/request.ListPrescription'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"success":true,"data":{},"msg":"处方查询成功"}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 查询处方信息
       tags:
       - 处方
   /prescription/submit:

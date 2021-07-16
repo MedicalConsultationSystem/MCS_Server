@@ -50,3 +50,16 @@ func AddPrescription(c *gin.Context){
 func SubmitPrescription(c *gin.Context){
 	response.SuccessWithMsg("接口还没写完，让你失望了",c)
 }
+
+// @Tags 处方
+// @Summary 查询处方信息
+// @Security ApiKeyAuth
+// @accept application/json
+// @Produce application/json
+// @Param data body request.ListPrescription true "问诊信息 id"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"处方查询成功"}"
+// @Router /prescription/list [post]
+func ListPrescription(c *gin.Context) {
+	response.SuccessWithMsg("接口还没写完，让你失望了",c)
+
+}

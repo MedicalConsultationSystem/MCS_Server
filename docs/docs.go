@@ -676,6 +676,44 @@ var doc = `{
                 }
             }
         },
+        "/prescription/list": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "处方"
+                ],
+                "summary": "查询处方信息",
+                "parameters": [
+                    {
+                        "description": "问诊信息 id",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/request.ListPrescription"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"处方查询成功\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/prescription/submit": {
             "post": {
                 "security": [
@@ -985,6 +1023,14 @@ var doc = `{
             "properties": {
                 "pinyin": {
                     "type": "string"
+                }
+            }
+        },
+        "request.ListPrescription": {
+            "type": "object",
+            "properties": {
+                "consult_id": {
+                    "type": "integer"
                 }
             }
         },
