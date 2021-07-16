@@ -44,3 +44,22 @@ func AddConsult(c *gin.Context)  {
 		response.SuccessWithMsg("问诊信息添加成功",c)
 	}
 }
+
+
+// @Tags 问诊
+// @Summary 根据名称用户id查询该用户的问诊信息
+// @Security ApiKeyAuth
+// @Produce application/json
+// @Param data body request.FindConsultByUser true "用户id"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"问诊信息获取成功"}"
+// @Router /consult/findByUser [post]
+func FindConsultByUser(c *gin.Context) {
+	var msg request.FindConsultByUser
+	_ = c.ShouldBindJSON(&msg)
+	if err,data := service.FindConsultByUser(msg.CreateUserId);err !=nil{
+		global.MCS_Log.Error("问诊信息获取失败",zap.Any("err",err))
+		response.FailWithMsg("问诊信息获取失败:"+err.Error(),c)
+	}else {
+		response.SuccessWithAll(data,"问诊信息获取成功",c)
+	}
+}

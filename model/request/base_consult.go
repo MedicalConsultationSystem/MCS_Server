@@ -27,3 +27,7 @@ type AddConsult struct {
 	PhotoIds         string    `json:"photo_ids"`
 	ConsultStatus    int       `json:"consult_status"`
 }
+
+type FindConsultByUser struct {
+	CreateUserId     string    `json:"create_user_id"`
+}

@@ -9,5 +9,6 @@ func InitConsultRouter(Router *gin.RouterGroup)  {
 	consultRouter := Router.Group("consult")
 	{
 		consultRouter.POST("add",api.AddConsult)
+		consultRouter.POST("findByUser",api.FindConsultByUser)
 	}
 }

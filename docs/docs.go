@@ -62,6 +62,41 @@ var doc = `{
                 }
             }
         },
+        "/consult/findByUser": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "问诊"
+                ],
+                "summary": "根据名称用户id查询该用户的问诊信息",
+                "parameters": [
+                    {
+                        "description": "用户id",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/request.FindConsultByUser"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"问诊信息获取成功\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/dept/add": {
             "post": {
                 "security": [
@@ -671,9 +706,6 @@ var doc = `{
                 "consult_status": {
                     "type": "integer"
                 },
-                "create_time": {
-                    "type": "string"
-                },
                 "create_user_id": {
                     "type": "string"
                 },
@@ -821,6 +853,14 @@ var doc = `{
             "type": "object",
             "properties": {
                 "org_name": {
+                    "type": "string"
+                }
+            }
+        },
+        "request.FindConsultByUser": {
+            "type": "object",
+            "properties": {
+                "create_user_id": {
                     "type": "string"
                 }
             }

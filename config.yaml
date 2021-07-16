@@ -3,7 +3,7 @@ information:
 
 mysql:
   path: '127.0.0.1'
-  config: 'charset=utf8mb4&parseTime=false&loc=Local'
+  config: 'charset=utf8mb4&parseTime=true&loc=Local'
   db-name: 'mcs'
   username: 'root'
   password: '123456'
