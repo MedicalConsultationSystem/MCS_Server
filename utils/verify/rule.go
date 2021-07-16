@@ -10,4 +10,10 @@ var (
 	AddDoctorVerify = Rules{"DoctorId":{NotEmpty},"DoctorName":{NotEmpty},
 		"OrgId":{NotEmpty},"OrgName":{NotEmpty},"DeptId":{NotEmpty},"DeptName":{NotEmpty}}
 	BaseDeptVerify = Rules{"DeptId":{NotEmpty},"DeptName":{NotEmpty}}
+	AddConsult = Rules{"OrgId":{NotEmpty},"OrgName":{NotEmpty},"DeptId":{NotEmpty},
+		"DeptName":{NotEmpty},"DoctorId":{NotEmpty},"DoctorName":{NotEmpty},
+		"CreateUserId":{NotEmpty},"PersonName":{NotEmpty},"PersonCardType":{NotEmpty},
+		"PersonCardId":{NotEmpty},"PersonGenderCode":{NotEmpty},"PersonGenderName":{NotEmpty},
+		"PersonBirthDate":{NotEmpty},"PersonAge":{NotEmpty},"PersonPhoneNo":{NotEmpty},
+		"Question":{NotEmpty},"Diagnosis":{NotEmpty},"DrugIds":{NotEmpty},"DrugNames":{NotEmpty},}
 )

@@ -24,6 +24,44 @@ var doc = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/consult/add": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "问诊"
+                ],
+                "summary": "创建一个问诊信息",
+                "parameters": [
+                    {
+                        "description": "问诊信息的各个字段",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/request.AddConsult"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"问诊信息添加成功\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/dept/add": {
             "post": {
                 "security": [
@@ -623,6 +661,83 @@ var doc = `{
                     "type": "integer"
                 },
                 "org_name": {
+                    "type": "string"
+                }
+            }
+        },
+        "request.AddConsult": {
+            "type": "object",
+            "properties": {
+                "consult_status": {
+                    "type": "integer"
+                },
+                "create_time": {
+                    "type": "string"
+                },
+                "create_user_id": {
+                    "type": "string"
+                },
+                "dept_id": {
+                    "type": "integer"
+                },
+                "dept_name": {
+                    "type": "string"
+                },
+                "diagnosis": {
+                    "type": "string"
+                },
+                "doctor_id": {
+                    "type": "string"
+                },
+                "doctor_level_code": {
+                    "type": "string"
+                },
+                "doctor_level_name": {
+                    "type": "string"
+                },
+                "doctor_name": {
+                    "type": "string"
+                },
+                "drug_ids": {
+                    "type": "string"
+                },
+                "drug_names": {
+                    "type": "string"
+                },
+                "org_id": {
+                    "type": "integer"
+                },
+                "org_name": {
+                    "type": "string"
+                },
+                "person_age": {
+                    "type": "integer"
+                },
+                "person_birth_date": {
+                    "type": "string"
+                },
+                "person_card_id": {
+                    "type": "string"
+                },
+                "person_card_type": {
+                    "type": "string"
+                },
+                "person_gender_code": {
+                    "type": "string"
+                },
+                "person_gender_name": {
+                    "type": "string"
+                },
+                "person_name": {
+                    "type": "string"
+                },
+                "person_phone_no": {
+                    "type": "string"
+                },
+                "photo_ids": {
+                    "type": "string"
+                },
+                "question": {
                     "type": "string"
                 }
             }
