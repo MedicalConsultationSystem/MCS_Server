@@ -22,3 +22,10 @@ func ListAllDept()(err error,depts []model.BaseDept)  {
 func DeleteDept(dept model.BaseDept) error {
 	return global.MCS_DB.Where("dept_id = ?",dept.DeptId).Delete(&dept).Error
 }
+
+func UpdateDept(dept model.BaseDept) error {
+	if !errors.Is(global.MCS_DB.Where("dept_name = ?",dept.DeptName).First(&model.BaseDept{}).Error,gorm.ErrRecordNotFound){
+		return errors.New("科室名称已存在")
+	}
+	return global.MCS_DB.Where("dept_id = ?",dept.DeptId).Save(&dept).Error
+}

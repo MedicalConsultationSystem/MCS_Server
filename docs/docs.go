@@ -121,6 +121,41 @@ var doc = `{
                 }
             }
         },
+        "/dept/updateDept": {
+            "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "科室"
+                ],
+                "summary": "根据传入的科室结构体更新数据库中对应科室信息",
+                "parameters": [
+                    {
+                        "description": "数据库中科室结构体",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.BaseDept"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"科室信息更新成功\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/doctor/add": {
             "post": {
                 "security": [

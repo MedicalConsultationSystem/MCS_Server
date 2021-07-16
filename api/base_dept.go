@@ -67,3 +67,27 @@ func DeleteDept(c *gin.Context) {
 		response.SuccessWithMsg("科室信息删除成功",c)
 	}
 }
+
+
+// @Tags 科室
+// @Summary 根据传入的科室结构体更新数据库中对应科室信息
+// @Security ApiKeyAuth
+// @Produce application/json
+// @Param data body model.BaseDept true "数据库中科室结构体"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"科室信息更新成功"}"
+// @Router /dept/updateDept [put]
+func UpdateDept(c *gin.Context){
+	var baseDept model.BaseDept
+	_ = c.ShouldBindJSON(&baseDept)
+	if err := verify.Verify(baseDept,verify.BaseDeptVerify);err != nil{
+		response.FailWithMsg(err.Error(),c)
+		return
+	}
+	if err := service.UpdateDept(baseDept);err != nil{
+		global.MCS_Log.Error("科室信息更新失败",zap.Any("err",err))
+		response.FailWithMsg("科室信息更新失败:"+err.Error(),c)
+	}else {
+		response.SuccessWithMsg("科室信息更新成功",c)
+	}
+
+}

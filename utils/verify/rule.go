@@ -9,4 +9,5 @@ var (
 		"Price": {NotEmpty}, "Dose": {NotEmpty}, "DoseUnit": {NotEmpty}}
 	AddDoctorVerify = Rules{"DoctorId":{NotEmpty},"DoctorName":{NotEmpty},
 		"OrgId":{NotEmpty},"OrgName":{NotEmpty},"DeptId":{NotEmpty},"DeptName":{NotEmpty}}
+	BaseDeptVerify = Rules{"DeptId":{NotEmpty},"DeptName":{NotEmpty}}
 )
