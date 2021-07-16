@@ -420,6 +420,30 @@ var doc = `{
                 }
             }
         },
+        "/drug/usage/listAll": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "药物"
+                ],
+                "summary": "获取所有药物用法信息",
+                "responses": {
+                    "200": {
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"药物用法信息获取成功\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/organization/add": {
             "post": {
                 "security": [

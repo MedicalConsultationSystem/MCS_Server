@@ -108,3 +108,18 @@ func DeleteDrug(c *gin.Context) {
 		response.SuccessWithMsg("药物信息删除成功",c)
 	}
 }
+
+// @Tags 药物
+// @Summary 获取所有药物用法信息
+// @Security ApiKeyAuth
+// @Produce application/json
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"药物用法信息获取成功"}"
+// @Router /drug/usage/listAll [get]
+func ListAllUsage(c *gin.Context){
+	if err,data := service.ListAllUsage();err!=nil{
+		global.MCS_Log.Error("药物用法信息获取失败",zap.Any("err",err))
+		response.FailWithMsg("药物用法信息获取失败:"+err.Error(),c)
+	}else {
+		response.SuccessWithAll(data,"药物用法信息获取成功",c)
+	}
+}
