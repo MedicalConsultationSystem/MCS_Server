@@ -13,6 +13,7 @@ func InitDrugRouter(Router *gin.RouterGroup) {
 		drugRouter.POST("findByPinyin", api.FindDrugByPinyin)
 		drugRouter.POST("findByName", api.FindDrugByName)
 		drugRouter.DELETE("deleteDrug", api.DeleteDrug)
+		drugRouter.PUT("updateDrug",api.UpdateDrug)
 	}
 	drugUsageRouter := drugRouter.Group("usage")
 	{

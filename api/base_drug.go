@@ -138,3 +138,26 @@ func ListAllFrequency( c*gin.Context){
 		response.SuccessWithAll(data,"药物频次信息获取成功",c)
 	}
 }
+
+// @Tags 药物
+// @Summary 根据传入的药物结构体更新数据库中对应药物信息
+// @Security ApiKeyAuth
+// @Produce application/json
+// @Param data body model.BaseDrug true "数据库中药物结构体"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"药物信息更新成功"}"
+// @Router /drug/updateDrug [put]
+func UpdateDrug(c *gin.Context){
+	var baseDrug model.BaseDrug
+	_ = c.ShouldBindJSON(&baseDrug)
+	if err := verify.Verify(baseDrug,verify.BaseDrugVerify);err != nil{
+		response.FailWithMsg(err.Error(),c)
+		return
+	}
+	if err := service.UpdateDrug(baseDrug);err != nil{
+		global.MCS_Log.Error("药物信息更新失败",zap.Any("err",err))
+		response.FailWithMsg("药物信息更新失败:"+err.Error(),c)
+	}else {
+		response.SuccessWithMsg("药物信息更新成功",c)
+	}
+
+}

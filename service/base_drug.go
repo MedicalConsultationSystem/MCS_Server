@@ -42,3 +42,7 @@ func ListAllFrequency() (err error,frequencies []model.BaseFrequency){
 	err = global.MCS_DB.Model(&model.BaseFrequency{}).Find(&frequencies).Error
 	return
 }
+
+func UpdateDrug(drug model.BaseDrug) error {
+	return global.MCS_DB.Where("drug_id = ?",drug.DrugId).Save(&drug).Error
+}

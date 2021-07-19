@@ -69,3 +69,26 @@ func DeleteOrg(c *gin.Context) {
 		response.SuccessWithMsg("机构信息删除成功",c)
 	}
 }
+
+// @Tags 机构
+// @Summary 根据传入的机构结构体更新数据库中对应机构信息
+// @Security ApiKeyAuth
+// @Produce application/json
+// @Param data body model.BaseOrg true "数据库中机构结构体"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"机构信息更新成功"}"
+// @Router /organization/updateOrg [put]
+func UpdateOrg(c *gin.Context){
+	var baseOrg model.BaseOrg
+	_ = c.ShouldBindJSON(&baseOrg)
+	if err := verify.Verify(baseOrg,verify.BaseOrgVerify);err != nil{
+		response.FailWithMsg(err.Error(),c)
+		return
+	}
+	if err := service.UpdateOrg(baseOrg);err != nil{
+		global.MCS_Log.Error("机构信息更新失败",zap.Any("err",err))
+		response.FailWithMsg("机构信息更新失败:"+err.Error(),c)
+	}else {
+		response.SuccessWithMsg("机构信息更新成功",c)
+	}
+
+}

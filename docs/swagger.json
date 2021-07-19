@@ -501,6 +501,41 @@
                 }
             }
         },
+        "/drug/updateDrug": {
+            "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "药物"
+                ],
+                "summary": "根据传入的药物结构体更新数据库中对应药物信息",
+                "parameters": [
+                    {
+                        "description": "数据库中药物结构体",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.BaseDrug"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"药物信息更新成功\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/drug/usage/listAll": {
             "get": {
                 "security": [
@@ -615,6 +650,41 @@
                 "responses": {
                     "200": {
                         "description": "{\"success\":true,\"data\":{},\"msg\":\"机构信息获取成功\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/organization/updateOrg": {
+            "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "机构"
+                ],
+                "summary": "根据传入的机构结构体更新数据库中对应机构信息",
+                "parameters": [
+                    {
+                        "description": "数据库中机构结构体",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.BaseOrg"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"机构信息更新成功\"}",
                         "schema": {
                             "type": "string"
                         }
