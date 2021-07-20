@@ -35,7 +35,7 @@ func ListPrescription(consultId int) (err error,data response.ListPrescription){
 			PrescriptionStatus: prescriptions[i].PrescriptionStatus,
 			Drugs: make([]model.BasePrescriptionDrug,0),
 		}
-		err = global.MCS_DB.Model(&model.BasePrescriptionDrug{}).Where("prescription_drug_id = ?",id).Find(&drugs).Error
+		err = global.MCS_DB.Model(&model.BasePrescriptionDrug{}).Where("prescription_id = ?",id).Find(&drugs).Error
 		if err != nil{
 			return
 		}
@@ -56,4 +56,8 @@ func SubmitPrescription(ids []int) (err error){
 		}
 	}
 	return
+}
+
+func DeletePrescriptionDrug(prescriptionDrugId int) error{
+	return global.MCS_DB.Where("prescription_drug_id = ?",prescriptionDrugId).Delete(&model.BasePrescriptionDrug{}).Error
 }

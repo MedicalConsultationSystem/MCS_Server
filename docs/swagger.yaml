@@ -157,6 +157,11 @@ definitions:
       user_id:
         type: string
     type: object
+  request.DeletePrescription:
+    properties:
+      prescription_drug_id:
+        type: integer
+    type: object
   request.FindConsultByUser:
     properties:
       create_user_id:
@@ -689,6 +694,29 @@ paths:
       summary: 为某个处方添加一种药物
       tags:
       - 处方
+  /prescription/delDrug:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - description: 包含处方药物id
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/request.DeletePrescription'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"success":true,"data":{},"msg":"处方药物删除成功"}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 为某个处方删除一种药物
+      tags:
+      - 处方
   /prescription/list:
     post:
       consumes:
@@ -732,7 +760,7 @@ paths:
             type: string
       security:
       - ApiKeyAuth: []
-      summary: 提交所有处方
+      summary: 提交处方
       tags:
       - 处方
 securityDefinitions:

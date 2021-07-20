@@ -784,6 +784,44 @@ var doc = `{
                 }
             }
         },
+        "/prescription/delDrug": {
+            "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "处方"
+                ],
+                "summary": "为某个处方删除一种药物",
+                "parameters": [
+                    {
+                        "description": "包含处方药物id",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/request.DeletePrescription"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"处方药物删除成功\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/prescription/list": {
             "post": {
                 "security": [
@@ -838,7 +876,7 @@ var doc = `{
                 "tags": [
                     "处方"
                 ],
-                "summary": "提交所有处方",
+                "summary": "提交处方",
                 "parameters": [
                     {
                         "description": "处方id",
@@ -1099,6 +1137,14 @@ var doc = `{
                 },
                 "user_id": {
                     "type": "string"
+                }
+            }
+        },
+        "request.DeletePrescription": {
+            "type": "object",
+            "properties": {
+                "prescription_drug_id": {
+                    "type": "integer"
                 }
             }
         },

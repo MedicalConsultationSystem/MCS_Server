@@ -50,11 +50,11 @@ func AddPrescription(c *gin.Context) {
 func SubmitPrescription(c *gin.Context) {
 	var msg = request.SubmitPrescription{}
 	_ = c.ShouldBindJSON(&msg)
-	if err := verify.Verify(msg,verify.SubmitPrescriptionVerify);err != nil{
+	if err := verify.Verify(msg, verify.SubmitPrescriptionVerify); err != nil {
 		response.FailWithMsg(err.Error(), c)
 		return
 	}
-	if err := service.SubmitPrescription(msg.PrescriptionIds);err != nil{
+	if err := service.SubmitPrescription(msg.PrescriptionIds); err != nil {
 		global.MCS_Log.Error("提交处方失败", zap.Any("err", err))
 		response.FailWithMsg(err.Error(), c)
 	}
@@ -78,14 +78,13 @@ func ListPrescription(c *gin.Context) {
 		response.FailWithMsg(err.Error(), c)
 		return
 	}
-	if err,data := service.ListPrescription(msg.ConsultId);err != nil{
-		global.MCS_Log.Error("处方信息获取失败",zap.Any("err",err))
-		response.FailWithMsg("处方信息获取失败:"+err.Error(),c)
-	}else {
-		response.SuccessWithAll(data,"处方信息获取成功",c)
+	if err, data := service.ListPrescription(msg.ConsultId); err != nil {
+		global.MCS_Log.Error("处方信息获取失败", zap.Any("err", err))
+		response.FailWithMsg("处方信息获取失败:"+err.Error(), c)
+	} else {
+		response.SuccessWithAll(data, "处方信息获取成功", c)
 	}
 }
-
 
 // @Tags 处方
 // @Summary 为某个处方添加一种药物
@@ -95,39 +94,59 @@ func ListPrescription(c *gin.Context) {
 // @Param data body request.PrescriptionDrug true "包含处方id"
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"处方药物添加成功"}"
 // @Router /prescription/addDrug [post]
-func AddPrescriptionDrug(c *gin.Context){
+func AddPrescriptionDrug(c *gin.Context) {
 	var newPreDrugMsg request.PrescriptionDrug
 	_ = c.ShouldBindJSON(&newPreDrugMsg)
 	fmt.Println(newPreDrugMsg)
-	if err := verify.Verify(newPreDrugMsg,verify.AddPrescriptionDrugVerify);err != nil{
+	if err := verify.Verify(newPreDrugMsg, verify.AddPrescriptionDrugVerify); err != nil {
 		response.FailWithMsg(err.Error(), c)
 		return
 	}
 	drug := model.BasePrescriptionDrug{
-		OrgId: newPreDrugMsg.OrgId,
+		OrgId:          newPreDrugMsg.OrgId,
 		PrescriptionId: newPreDrugMsg.PrescriptionId,
-		DrugId: newPreDrugMsg.DrugId,
-		DrugName: newPreDrugMsg.DrugName,
-		Specification: newPreDrugMsg.Specification,
-		Dose: newPreDrugMsg.Dose,
-		DoseUnit: newPreDrugMsg.DoseUnit,
-		FrequencyCode: newPreDrugMsg.FrequencyCode,
-		FrequencyName: newPreDrugMsg.FrequencyName,
-		UsageCode: newPreDrugMsg.UsageCode,
-		UsageName: newPreDrugMsg.UsageName,
-		TakeDays: newPreDrugMsg.TakeDays,
-		Quantity: newPreDrugMsg.Quantity,
-		Price: newPreDrugMsg.Price,
-		PackUnit: newPreDrugMsg.PackUnit,
-		GroupNumber: newPreDrugMsg.GroupNumber,
-		SortNumber: newPreDrugMsg.SortNumber,
-		Remark: newPreDrugMsg.Remark,
+		DrugId:         newPreDrugMsg.DrugId,
+		DrugName:       newPreDrugMsg.DrugName,
+		Specification:  newPreDrugMsg.Specification,
+		Dose:           newPreDrugMsg.Dose,
+		DoseUnit:       newPreDrugMsg.DoseUnit,
+		FrequencyCode:  newPreDrugMsg.FrequencyCode,
+		FrequencyName:  newPreDrugMsg.FrequencyName,
+		UsageCode:      newPreDrugMsg.UsageCode,
+		UsageName:      newPreDrugMsg.UsageName,
+		TakeDays:       newPreDrugMsg.TakeDays,
+		Quantity:       newPreDrugMsg.Quantity,
+		Price:          newPreDrugMsg.Price,
+		PackUnit:       newPreDrugMsg.PackUnit,
+		GroupNumber:    newPreDrugMsg.GroupNumber,
+		SortNumber:     newPreDrugMsg.SortNumber,
+		Remark:         newPreDrugMsg.Remark,
 	}
-	if err := service.AddPrescriptionDrug(drug);err != nil{
+	if err := service.AddPrescriptionDrug(drug); err != nil {
 		global.MCS_Log.Error("处方药物添加失败", zap.Any("err", err))
 		response.FailWithMsg(err.Error(), c)
-	}else {
+	} else {
 		response.SuccessWithMsg("处方药物添加成功", c)
+	}
+
+}
+
+// @Tags 处方
+// @Summary 为某个处方删除一种药物
+// @Security ApiKeyAuth
+// @accept application/json
+// @Produce application/json
+// @Param data body request.DeletePrescription true "包含处方药物id"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"处方药物删除成功"}"
+// @Router /prescription/delDrug [delete]
+func DeletePrescriptionDrug(c *gin.Context) {
+	var newPreDrugMsg request.DeletePrescription
+	_ = c.ShouldBindJSON(&newPreDrugMsg)
+	if err := service.DeletePrescriptionDrug(newPreDrugMsg.PrescriptionDrugId); err != nil {
+		global.MCS_Log.Error("处方药物删除失败", zap.Any("err", err))
+		response.FailWithMsg(err.Error(), c)
+	} else {
+		response.SuccessWithMsg("处方药物删除成功", c)
 	}
 
 }
