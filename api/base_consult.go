@@ -63,3 +63,21 @@ func FindConsultByUser(c *gin.Context) {
 		response.SuccessWithAll(data,"问诊信息获取成功",c)
 	}
 }
+
+// @Tags 问诊
+// @Summary 根据医生id查询问诊信息
+// @Security ApiKeyAuth
+// @Produce application/json
+// @Param data body request.FindConsultByDoctor true "医生id"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"问诊信息获取成功"}"
+// @Router /consult/findByDoctor [post]
+func FindConsultByDoctor(c *gin.Context){
+	var msg request.FindConsultByDoctor
+	_ = c.ShouldBindJSON(&msg)
+	if err,data := service.FindConsultByDoctor(msg.DoctorId);err != nil{
+		global.MCS_Log.Error("问诊信息获取失败",zap.Any("err",err))
+		response.FailWithMsg("问诊信息获取失败:"+err.Error(),c)
+	}else {
+		response.SuccessWithAll(data,"问诊信息获取成功",c)
+	}
+}

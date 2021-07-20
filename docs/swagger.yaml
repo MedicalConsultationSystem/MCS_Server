@@ -167,6 +167,11 @@ definitions:
       prescription_drug_id:
         type: integer
     type: object
+  request.FindConsultByDoctor:
+    properties:
+      doctor_id:
+        type: string
+    type: object
   request.FindConsultByUser:
     properties:
       create_user_id:
@@ -265,6 +270,27 @@ paths:
       security:
       - ApiKeyAuth: []
       summary: 创建一个问诊信息
+      tags:
+      - 问诊
+  /consult/findByDoctor:
+    post:
+      parameters:
+      - description: 医生id
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/request.FindConsultByDoctor'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"success":true,"data":{},"msg":"问诊信息获取成功"}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 根据医生id查询问诊信息
       tags:
       - 问诊
   /consult/findByUser:

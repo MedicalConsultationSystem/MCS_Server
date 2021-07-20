@@ -62,6 +62,41 @@ var doc = `{
                 }
             }
         },
+        "/consult/findByDoctor": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "问诊"
+                ],
+                "summary": "根据医生id查询问诊信息",
+                "parameters": [
+                    {
+                        "description": "医生id",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/request.FindConsultByDoctor"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"问诊信息获取成功\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/consult/findByUser": {
             "post": {
                 "security": [
@@ -1191,6 +1226,14 @@ var doc = `{
             "properties": {
                 "prescription_drug_id": {
                     "type": "integer"
+                }
+            }
+        },
+        "request.FindConsultByDoctor": {
+            "type": "object",
+            "properties": {
+                "doctor_id": {
+                    "type": "string"
                 }
             }
         },

@@ -31,3 +31,7 @@ type AddConsult struct {
 type FindConsultByUser struct {
 	CreateUserId     string    `json:"create_user_id"`
 }
+
+type FindConsultByDoctor struct {
+	DoctorId     string    `json:"doctor_id"`
+}
