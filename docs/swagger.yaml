@@ -182,15 +182,6 @@ definitions:
       consult_id:
         type: integer
     type: object
-  request.Prescription:
-    properties:
-      drugs:
-        items:
-          $ref: '#/definitions/request.PrescriptionDrug'
-        type: array
-      prescription_id:
-        type: integer
-    type: object
   request.PrescriptionDrug:
     properties:
       dose:
@@ -232,9 +223,9 @@ definitions:
     type: object
   request.SubmitPrescription:
     properties:
-      prescription:
+      prescription_ids:
         items:
-          $ref: '#/definitions/request.Prescription'
+          type: integer
         type: array
     type: object
 info:
@@ -726,7 +717,7 @@ paths:
       consumes:
       - application/json
       parameters:
-      - description: 机构id，用户id，问诊信息id，处方类型，医生id，医生名称
+      - description: 处方id
         in: body
         name: data
         required: true

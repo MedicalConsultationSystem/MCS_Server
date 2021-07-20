@@ -841,7 +841,7 @@ var doc = `{
                 "summary": "提交所有处方",
                 "parameters": [
                     {
-                        "description": "机构id，用户id，问诊信息id，处方类型，医生id，医生名称",
+                        "description": "处方id",
                         "name": "data",
                         "in": "body",
                         "required": true,
@@ -1142,20 +1142,6 @@ var doc = `{
                 }
             }
         },
-        "request.Prescription": {
-            "type": "object",
-            "properties": {
-                "drugs": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/request.PrescriptionDrug"
-                    }
-                },
-                "prescription_id": {
-                    "type": "integer"
-                }
-            }
-        },
         "request.PrescriptionDrug": {
             "type": "object",
             "properties": {
@@ -1218,10 +1204,10 @@ var doc = `{
         "request.SubmitPrescription": {
             "type": "object",
             "properties": {
-                "prescription": {
+                "prescription_ids": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/request.Prescription"
+                        "type": "integer"
                     }
                 }
             }

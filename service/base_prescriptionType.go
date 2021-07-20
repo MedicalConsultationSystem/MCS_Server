@@ -4,6 +4,7 @@ import (
 	"MCS_Server/global"
 	"MCS_Server/model"
 	"MCS_Server/model/response"
+	"fmt"
 )
 
 func AddPrescription(prescription model.BasePrescription) error {
@@ -32,6 +33,7 @@ func ListPrescription(consultId int) (err error,data response.ListPrescription){
 			DoctorId: prescriptions[i].DoctorId,
 			DoctorName: prescriptions[i].DoctorName,
 			CreateTime: prescriptions[i].CreateTime,
+			PrescriptionStatus: prescriptions[i].PrescriptionStatus,
 			Drugs: make([]model.BasePrescriptionDrug,0),
 		}
 		err = global.MCS_DB.Model(&model.BasePrescriptionDrug{}).Where("prescription_drug_id = ?",id).Find(&drugs).Error
@@ -47,3 +49,13 @@ func ListPrescription(consultId int) (err error,data response.ListPrescription){
 	return
 }
 
+func SubmitPrescription(ids []int) (err error){
+	for i:=0;i<len(ids);i++ {
+		fmt.Println(ids[i])
+		err = global.MCS_DB.Model(&model.BasePrescription{}).Where("prescription_id = ?",ids[i]).Update("prescription_status","1").Error
+		if err !=nil{
+			return
+		}
+	}
+	return
+}

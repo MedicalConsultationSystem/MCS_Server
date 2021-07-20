@@ -24,4 +24,5 @@ var (
 		"PrescriptionType":{NotEmpty},"DoctorId":{NotEmpty},"DoctorName":{NotEmpty}}
 	ListPrescriptionVerify = Rules{"ConsultId":{NotEmpty}}
 	AddPrescriptionDrugVerify = Rules{"OrgId":{NotEmpty},"PrescriptionId":{NotEmpty}}
+	SubmitPrescriptionVerify = Rules{"PrescriptionIds":{NotEmpty}}
 )

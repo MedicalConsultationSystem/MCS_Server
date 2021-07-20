@@ -40,15 +40,28 @@ func AddPrescription(c *gin.Context) {
 }
 
 // @Tags 处方
-// @Summary 提交所有处方
+// @Summary 提交处方
 // @Security ApiKeyAuth
 // @accept application/json
 // @Produce application/json
-// @Param data body request.SubmitPrescription true "机构id，用户id，问诊信息id，处方类型，医生id，医生名称"
+// @Param data body request.SubmitPrescription true "处方id"
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"处方提交成功"}"
 // @Router /prescription/submit [post]
 func SubmitPrescription(c *gin.Context) {
-	response.SuccessWithMsg("接口还没写完，让你失望了", c)
+	var msg = request.SubmitPrescription{}
+	_ = c.ShouldBindJSON(&msg)
+	fmt.Println(msg)
+	if err := verify.Verify(msg,verify.SubmitPrescriptionVerify);err != nil{
+		response.FailWithMsg(err.Error(), c)
+		return
+	}
+	if err := service.SubmitPrescription(msg.PrescriptionIds);err != nil{
+		global.MCS_Log.Error("提交处方失败", zap.Any("err", err))
+		response.FailWithMsg(err.Error(), c)
+	}
+	response.SuccessWithMsg("处方提交成功", c)
+
+	//response.SuccessWithMsg("接口还没写完，让你失望了", c)
 }
 
 // @Tags 处方

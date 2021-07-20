@@ -30,13 +30,13 @@ type PrescriptionDrug struct {
 	Remark         string  `json:"remark"`
 }
 
-type Prescription struct {
-	PrescriptionId int                `json:"prescription_id"`
-	Drugs          []PrescriptionDrug `json:"drugs"`
-}
+//type Prescription struct {
+//	PrescriptionId int                `json:"prescription_id"`
+//	Drugs          []PrescriptionDrug `json:"drugs"`
+//}
 
 type SubmitPrescription struct {
-	Prescription []Prescription `json:"prescription"`
+	PrescriptionIds []int `json:"prescription_ids"`
 }
 
 type ListPrescription struct {
