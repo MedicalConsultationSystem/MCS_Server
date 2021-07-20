@@ -4,7 +4,6 @@ import (
 	"MCS_Server/global"
 	"MCS_Server/model"
 	"MCS_Server/model/response"
-	"fmt"
 )
 
 func AddPrescription(prescription model.BasePrescription) error {
@@ -51,7 +50,6 @@ func ListPrescription(consultId int) (err error,data response.ListPrescription){
 
 func SubmitPrescription(ids []int) (err error){
 	for i:=0;i<len(ids);i++ {
-		fmt.Println(ids[i])
 		err = global.MCS_DB.Model(&model.BasePrescription{}).Where("prescription_id = ?",ids[i]).Update("prescription_status","1").Error
 		if err !=nil{
 			return

@@ -50,7 +50,6 @@ func AddPrescription(c *gin.Context) {
 func SubmitPrescription(c *gin.Context) {
 	var msg = request.SubmitPrescription{}
 	_ = c.ShouldBindJSON(&msg)
-	fmt.Println(msg)
 	if err := verify.Verify(msg,verify.SubmitPrescriptionVerify);err != nil{
 		response.FailWithMsg(err.Error(), c)
 		return
