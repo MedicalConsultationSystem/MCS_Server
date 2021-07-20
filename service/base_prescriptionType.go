@@ -10,6 +10,10 @@ func AddPrescription(prescription model.BasePrescription) error {
 	return global.MCS_DB.Create(&prescription).Error
 }
 
+func AddPrescriptionDrug(drug model.BasePrescriptionDrug) error{
+	return global.MCS_DB.Create(drug).Error
+}
+
 func ListPrescription(consultId int) (err error,data response.ListPrescription){
 	var prescriptions []model.BasePrescription
 	err = global.MCS_DB.Model(&model.BasePrescription{}).Where("consult_id = ?",consultId).Find(&prescriptions).Error
@@ -42,3 +46,4 @@ func ListPrescription(consultId int) (err error,data response.ListPrescription){
 	}
 	return
 }
+

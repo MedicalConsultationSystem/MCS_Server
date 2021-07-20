@@ -675,6 +675,29 @@ paths:
       summary: 增加一个处方
       tags:
       - 处方
+  /prescription/addDrug:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 包含处方id
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/request.PrescriptionDrug'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"success":true,"data":{},"msg":"处方药物添加成功"}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 为某个处方添加一种药物
+      tags:
+      - 处方
   /prescription/list:
     post:
       consumes:

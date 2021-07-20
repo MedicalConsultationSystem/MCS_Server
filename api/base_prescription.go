@@ -7,6 +7,7 @@ import (
 	"MCS_Server/model/response"
 	"MCS_Server/service"
 	"MCS_Server/utils/verify"
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 	"time"
@@ -71,5 +72,50 @@ func ListPrescription(c *gin.Context) {
 	}else {
 		response.SuccessWithAll(data,"处方信息获取成功",c)
 	}
-	//response.SuccessWithMsg("接口还没写完，让你失望了", c)
+}
+
+
+// @Tags 处方
+// @Summary 为某个处方添加一种药物
+// @Security ApiKeyAuth
+// @accept application/json
+// @Produce application/json
+// @Param data body request.PrescriptionDrug true "包含处方id"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"处方药物添加成功"}"
+// @Router /prescription/addDrug [post]
+func AddPrescriptionDrug(c *gin.Context){
+	var newPreDrugMsg request.PrescriptionDrug
+	_ = c.ShouldBindJSON(&newPreDrugMsg)
+	fmt.Println(newPreDrugMsg)
+	if err := verify.Verify(newPreDrugMsg,verify.AddPrescriptionDrugVerify);err != nil{
+		response.FailWithMsg(err.Error(), c)
+		return
+	}
+	drug := model.BasePrescriptionDrug{
+		OrgId: newPreDrugMsg.OrgId,
+		PrescriptionId: newPreDrugMsg.PrescriptionId,
+		DrugId: newPreDrugMsg.DrugId,
+		DrugName: newPreDrugMsg.DrugName,
+		Specification: newPreDrugMsg.Specification,
+		Dose: newPreDrugMsg.Dose,
+		DoseUnit: newPreDrugMsg.DoseUnit,
+		FrequencyCode: newPreDrugMsg.FrequencyCode,
+		FrequencyName: newPreDrugMsg.FrequencyName,
+		UsageCode: newPreDrugMsg.UsageCode,
+		UsageName: newPreDrugMsg.UsageName,
+		TakeDays: newPreDrugMsg.TakeDays,
+		Quantity: newPreDrugMsg.Quantity,
+		Price: newPreDrugMsg.Price,
+		PackUnit: newPreDrugMsg.PackUnit,
+		GroupNumber: newPreDrugMsg.GroupNumber,
+		SortNumber: newPreDrugMsg.SortNumber,
+		Remark: newPreDrugMsg.Remark,
+	}
+	if err := service.AddPrescriptionDrug(drug);err != nil{
+		global.MCS_Log.Error("处方药物添加失败", zap.Any("err", err))
+		response.FailWithMsg(err.Error(), c)
+	}else {
+		response.SuccessWithMsg("处方药物添加成功", c)
+	}
+
 }
