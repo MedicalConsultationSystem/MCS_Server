@@ -39,8 +39,12 @@ type SubmitPrescription struct {
 	PrescriptionIds []int `json:"prescription_ids"`
 }
 
-type DeletePrescription struct {
+type DeletePrescriptionDrug struct {
 	PrescriptionDrugId int `json:"prescription_drug_id"`
+}
+
+type DeletePrescription struct {
+	PrescriptionId int `json:"prescription_id"`
 }
 
 type ListPrescription struct {

@@ -136,11 +136,11 @@ func AddPrescriptionDrug(c *gin.Context) {
 // @Security ApiKeyAuth
 // @accept application/json
 // @Produce application/json
-// @Param data body request.DeletePrescription true "包含处方药物id"
+// @Param data body request.DeletePrescriptionDrug true "包含处方药物id"
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"处方药物删除成功"}"
 // @Router /prescription/delDrug [delete]
 func DeletePrescriptionDrug(c *gin.Context) {
-	var newPreDrugMsg request.DeletePrescription
+	var newPreDrugMsg request.DeletePrescriptionDrug
 	_ = c.ShouldBindJSON(&newPreDrugMsg)
 	if err := service.DeletePrescriptionDrug(newPreDrugMsg.PrescriptionDrugId); err != nil {
 		global.MCS_Log.Error("处方药物删除失败", zap.Any("err", err))
@@ -149,4 +149,23 @@ func DeletePrescriptionDrug(c *gin.Context) {
 		response.SuccessWithMsg("处方药物删除成功", c)
 	}
 
+}
+
+// @Tags 处方
+// @Summary 删除某个处方
+// @Security ApiKeyAuth
+// @accept application/json
+// @Produce application/json
+// @Param data body request.DeletePrescription true "包含处方id"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"处方删除成功"}"
+// @Router /prescription/delPre [delete]
+func DeletePrescription(c *gin.Context) {
+	var newPreMsg request.DeletePrescription
+	_ = c.ShouldBindJSON(&newPreMsg)
+	if err := service.DeletePrescription(newPreMsg.PrescriptionId); err != nil {
+		global.MCS_Log.Error("处方删除失败", zap.Any("err", err))
+		response.FailWithMsg(err.Error(), c)
+	} else {
+		response.SuccessWithMsg("处方删除成功", c)
+	}
 }

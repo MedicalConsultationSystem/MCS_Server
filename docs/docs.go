@@ -808,13 +808,51 @@ var doc = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/request.DeletePrescription"
+                            "$ref": "#/definitions/request.DeletePrescriptionDrug"
                         }
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "{\"success\":true,\"data\":{},\"msg\":\"处方药物删除成功\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/prescription/delPre": {
+            "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "处方"
+                ],
+                "summary": "删除某个处方",
+                "parameters": [
+                    {
+                        "description": "包含处方id",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/request.DeletePrescription"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"处方删除成功\"}",
                         "schema": {
                             "type": "string"
                         }
@@ -1141,6 +1179,14 @@ var doc = `{
             }
         },
         "request.DeletePrescription": {
+            "type": "object",
+            "properties": {
+                "prescription_id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "request.DeletePrescriptionDrug": {
             "type": "object",
             "properties": {
                 "prescription_drug_id": {

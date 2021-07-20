@@ -13,5 +13,7 @@ func InitPrescriptionRouter(Router *gin.RouterGroup) {
 		prescription.POST("list",api.ListPrescription)
 		prescription.POST("addDrug",api.AddPrescriptionDrug)
 		prescription.DELETE("delDrug",api.DeletePrescriptionDrug)
+		prescription.DELETE("delPre",api.DeletePrescription)
+
 	}
 }
