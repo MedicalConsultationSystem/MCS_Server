@@ -1,6 +1,8 @@
 package request
 
 type Login struct {
+	AppId string `json:"app_id"`
+	AppSecret string `json:"app_secret"`
 	Code string `json:"code"`
-	PhoneNo string `json:"phone_no"`
+	Phone string `json:"phone"`
 }

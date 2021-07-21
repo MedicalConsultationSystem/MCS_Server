@@ -2,16 +2,23 @@ package api
 
 import (
 	"MCS_Server/global"
-	"MCS_Server/model"
 	"MCS_Server/model/request"
 	"MCS_Server/model/response"
 	"MCS_Server/service"
 	"MCS_Server/utils/verify"
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 )
 
+
+// @Tags 账户
+// @Summary 用户登录
+// @Security ApiKeyAuth
+// @accept application/json
+// @Produce application/json
+// @Param data body request.Login true "微信小程序 Appid AppSecret code"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"登录成功"}"
+// @Router /account/login [post]
 func Login(c *gin.Context) {
 	var loginMsg request.Login
 	_ = c.ShouldBindJSON(&loginMsg)
@@ -19,10 +26,10 @@ func Login(c *gin.Context) {
 		response.FailWithMsg(err.Error(), c)
 		return
 	}
-	a := &model.BaseAccount{Code: loginMsg.Code,PhoneNo: loginMsg.PhoneNo}
-	if err,account := service.Login(a);err !=nil{
-		global.MCS_Log.Error("登陆失败!",zap.Any("err", err))
+	if err,account := service.Login(loginMsg);err !=nil{
+		global.MCS_Log.Error("登陆失败!" + err.Error(),zap.Any("err", err))
+		response.FailWithMsg(err.Error(), c)
 	}else {
-		fmt.Println(account)
+		response.SuccessWithAll(account,"登录成功",c)
 	}
 }
