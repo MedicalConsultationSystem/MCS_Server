@@ -9,7 +9,6 @@ import (
 	"time"
 )
 
-
 func Login(loginMsg request.Login) (err error, account model.BaseAccount) {
 	//url := "https://api.weixin.qq.com/sns/jscode2session?appid=" + loginMsg.AppId + "&secret=" + loginMsg.AppSecret +
 	//	"&js_code=" + loginMsg.Code + "&grant_type=authorization_code"
@@ -46,8 +45,13 @@ func Login(loginMsg request.Login) (err error, account model.BaseAccount) {
 	if !errors.Is(global.MCS_DB.Where("user_id = ? ", loginMsg.OpenId).First(&account).Error, gorm.ErrRecordNotFound) {
 		return
 	} else {
+		var doctor model.BaseDoctor
+		if !errors.Is(global.MCS_DB.Where("doctor_id = ? ", loginMsg.Phone).First(&doctor).Error, gorm.ErrRecordNotFound) {
+			account.UserType = "2"
+		}else {
+			account.UserType = "1"
+		}
 		account.UserId = loginMsg.OpenId
-		account.UserType = "1"
 		account.MiniOpenId = loginMsg.OpenId
 		account.PhoneNo = loginMsg.Phone
 		account.CreateTime = time.Now()
