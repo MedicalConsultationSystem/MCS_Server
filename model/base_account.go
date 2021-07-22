@@ -9,3 +9,6 @@ type BaseAccount struct {
 	PhoneNo    string    `json:"phone_no"`
 	CreateTime time.Time `json:"create_time"`
 }
+func (m *BaseAccount) TableName() string {
+	return "base_account"
+}

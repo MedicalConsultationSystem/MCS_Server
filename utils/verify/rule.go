@@ -1,7 +1,7 @@
 package verify
 
 var (
-	LoginVerify   = Rules{"AppId": {NotEmpty}, "AppSecret": {NotEmpty},"Code":{NotEmpty},"Phone":{NotEmpty}}
+	LoginVerify   = Rules{"OpenId":{NotEmpty},"Phone":{NotEmpty}}
 	AddOrgVerify  = Rules{"OrgName": {NotEmpty}}
 	AddDeptVerify = Rules{"DeptName": {NotEmpty}}
 	AddDrugVerify = Rules{"DrugName": {NotEmpty}, "TradeName": {NotEmpty},

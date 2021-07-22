@@ -1319,7 +1319,6 @@ var doc = `{
             "type": "object",
             "properties": {
                 "open_id": {
-                    "description": "AppId string ` + "`" + `json:\"app_id\"` + "`" + `\nAppSecret string ` + "`" + `json:\"app_secret\"` + "`" + `\nCode string ` + "`" + `json:\"code\"` + "`" + `",
                     "type": "string"
                 },
                 "phone": {

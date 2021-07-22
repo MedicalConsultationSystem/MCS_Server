@@ -200,10 +200,6 @@ definitions:
   request.Login:
     properties:
       open_id:
-        description: |-
-          AppId string `json:"app_id"`
-          AppSecret string `json:"app_secret"`
-          Code string `json:"code"`
         type: string
       phone:
         type: string
