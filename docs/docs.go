@@ -1318,13 +1318,8 @@ var doc = `{
         "request.Login": {
             "type": "object",
             "properties": {
-                "app_id": {
-                    "type": "string"
-                },
-                "app_secret": {
-                    "type": "string"
-                },
-                "code": {
+                "open_id": {
+                    "description": "AppId string ` + "`" + `json:\"app_id\"` + "`" + `\nAppSecret string ` + "`" + `json:\"app_secret\"` + "`" + `\nCode string ` + "`" + `json:\"code\"` + "`" + `",
                     "type": "string"
                 },
                 "phone": {

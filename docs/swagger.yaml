@@ -199,11 +199,11 @@ definitions:
     type: object
   request.Login:
     properties:
-      app_id:
-        type: string
-      app_secret:
-        type: string
-      code:
+      open_id:
+        description: |-
+          AppId string `json:"app_id"`
+          AppSecret string `json:"app_secret"`
+          Code string `json:"code"`
         type: string
       phone:
         type: string
