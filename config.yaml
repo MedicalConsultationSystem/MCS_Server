@@ -15,3 +15,8 @@ zap:
   header: '[MCS_Server]'
   format: 'console'
   show-line: true
+
+jwt:
+  signing-key: 'MCS2021'
+  expires-time: 604800
+  buffer-time: 86400

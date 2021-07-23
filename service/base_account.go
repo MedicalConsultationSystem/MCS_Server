@@ -1,12 +1,8 @@
 package service
 
 import (
-	"MCS_Server/global"
 	"MCS_Server/model"
 	"MCS_Server/model/request"
-	"errors"
-	"gorm.io/gorm"
-	"time"
 )
 
 func Login(loginMsg request.Login) (err error, account model.BaseAccount) {
@@ -42,21 +38,22 @@ func Login(loginMsg request.Login) (err error, account model.BaseAccount) {
 	//	err = errors.New("微信小程序没有返回对应openid")
 	//	return
 	//}
-	if !errors.Is(global.MCS_DB.Where("user_id = ? ", loginMsg.OpenId).First(&account).Error, gorm.ErrRecordNotFound) {
-		return
-	} else {
-		var doctor model.BaseDoctor
-		if !errors.Is(global.MCS_DB.Where("doctor_id = ? ", loginMsg.Phone).First(&doctor).Error, gorm.ErrRecordNotFound) {
-			account.UserType = "2"
-		}else {
-			account.UserType = "1"
-		}
-		account.UserId = loginMsg.OpenId
-		account.MiniOpenId = loginMsg.OpenId
-		account.PhoneNo = loginMsg.Phone
-		account.CreateTime = time.Now()
-		err = global.MCS_DB.Create(&account).Error
-		return
-	}
+	//if !errors.Is(global.MCS_DB.Where("user_id = ? ", loginMsg.OpenId).First(&account).Error, gorm.ErrRecordNotFound) {
+	//	return
+	//} else {
+	//	var doctor model.BaseDoctor
+	//	if !errors.Is(global.MCS_DB.Where("doctor_id = ? ", loginMsg.Phone).First(&doctor).Error, gorm.ErrRecordNotFound) {
+	//		account.UserType = "2"
+	//	}else {
+	//		account.UserType = "1"
+	//	}
+	//	account.UserId = loginMsg.OpenId
+	//	account.MiniOpenId = loginMsg.OpenId
+	//	account.PhoneNo = loginMsg.Phone
+	//	account.CreateTime = time.Now()
+	//	err = global.MCS_DB.Create(&account).Error
+	//	return
+	//}
+	return
 
 }

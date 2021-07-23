@@ -12,13 +12,17 @@ import (
 )
 
 func Routers() *gin.Engine {
-	Router:= gin.Default()
+	Router := gin.Default()
 	Router.Use(middleware.Cors())
 	Router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	global.MCS_Log.Info("register swagger handler")
-	routerGroup := Router.Group("")
+	loginRouter := Router.Group("")
 	{
-		router.InitUserRouter(routerGroup)
+		router.InitUserRouter(loginRouter)
+	}
+	routerGroup := Router.Group("")
+	routerGroup.Use(middleware.JWTHandler())
+	{
 		router.InitOrgRouter(routerGroup)
 		router.InitDeptRouter(routerGroup)
 		router.InitDrugRouter(routerGroup)
