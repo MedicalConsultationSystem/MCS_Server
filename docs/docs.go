@@ -62,6 +62,41 @@ var doc = `{
                 }
             }
         },
+        "/consult/accept": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "问诊"
+                ],
+                "summary": "医生接诊",
+                "parameters": [
+                    {
+                        "description": "问诊id",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/request.ChangeConsultState"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"接诊成功\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/consult/add": {
             "post": {
                 "security": [
@@ -163,6 +198,41 @@ var doc = `{
                 "responses": {
                     "200": {
                         "description": "{\"success\":true,\"data\":{},\"msg\":\"问诊信息获取成功\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/consult/finish": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "问诊"
+                ],
+                "summary": "医生结束问诊",
+                "parameters": [
+                    {
+                        "description": "问诊id",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/request.ChangeConsultState"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"问诊结束成功\"}",
                         "schema": {
                             "type": "string"
                         }
@@ -1420,6 +1490,14 @@ var doc = `{
                 },
                 "user_id": {
                     "type": "string"
+                }
+            }
+        },
+        "request.ChangeConsultState": {
+            "type": "object",
+            "properties": {
+                "consult_id": {
+                    "type": "integer"
                 }
             }
         },

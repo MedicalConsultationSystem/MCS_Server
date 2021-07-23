@@ -80,3 +80,41 @@ func FindConsultByDoctor(c *gin.Context) {
 		response.SuccessWithAll(data, "问诊信息获取成功", c)
 	}
 }
+
+// @Tags 问诊
+// @Summary 医生接诊
+// @Security ApiKeyAuth
+// @Produce application/json
+// @Param data body request.ChangeConsultState true "问诊id"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"接诊成功"}"
+// @Router /consult/accept [post]
+func AcceptConsult(c *gin.Context){
+	var msg request.ChangeConsultState
+	_ = c.ShouldBindJSON(&msg)
+	if err := service.AcceptConsult(msg.ConsultId);err !=nil{
+		global.MCS_Log.Error("接诊失败", zap.Any("err", err))
+		response.FailWithMsg("接诊失败:"+err.Error(), c)
+	}else {
+		response.SuccessWithMsg("接诊成功", c)
+
+	}
+}
+
+// @Tags 问诊
+// @Summary 医生结束问诊
+// @Security ApiKeyAuth
+// @Produce application/json
+// @Param data body request.ChangeConsultState true "问诊id"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"问诊结束成功"}"
+// @Router /consult/finish [post]
+func FinishConsult(c *gin.Context){
+	var msg request.ChangeConsultState
+	_ = c.ShouldBindJSON(&msg)
+	if err := service.FinishConsult(msg.ConsultId);err !=nil{
+		global.MCS_Log.Error("问诊结束失败", zap.Any("err", err))
+		response.FailWithMsg("问诊结束失败:"+err.Error(), c)
+	}else {
+		response.SuccessWithMsg("问诊结束成功", c)
+
+	}
+}

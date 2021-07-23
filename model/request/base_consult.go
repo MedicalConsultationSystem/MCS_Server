@@ -35,3 +35,7 @@ type FindConsultByUser struct {
 type FindConsultByDoctor struct {
 	DoctorId     string    `json:"doctor_id"`
 }
+
+type ChangeConsultState struct {
+	ConsultId        int       `json:"consult_id"`
+}

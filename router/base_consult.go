@@ -11,6 +11,7 @@ func InitConsultRouter(Router *gin.RouterGroup)  {
 		consultRouter.POST("add",api.AddConsult)
 		consultRouter.POST("findByUser",api.FindConsultByUser)
 		consultRouter.POST("findByDoctor",api.FindConsultByDoctor)
-
+		consultRouter.POST("accept",api.AcceptConsult)
+		consultRouter.POST("finish",api.FinishConsult)
 	}
 }

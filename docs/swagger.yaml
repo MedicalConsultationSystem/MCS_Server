@@ -178,6 +178,11 @@ definitions:
       user_id:
         type: string
     type: object
+  request.ChangeConsultState:
+    properties:
+      consult_id:
+        type: integer
+    type: object
   request.DeleteDoctor:
     properties:
       doctor_id:
@@ -315,6 +320,27 @@ paths:
       summary: 用户登录
       tags:
       - 账户
+  /consult/accept:
+    post:
+      parameters:
+      - description: 问诊id
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/request.ChangeConsultState'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"success":true,"data":{},"msg":"接诊成功"}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 医生接诊
+      tags:
+      - 问诊
   /consult/add:
     post:
       consumes:
@@ -378,6 +404,27 @@ paths:
       security:
       - ApiKeyAuth: []
       summary: 根据名称用户id查询该用户的问诊信息
+      tags:
+      - 问诊
+  /consult/finish:
+    post:
+      parameters:
+      - description: 问诊id
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/request.ChangeConsultState'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"success":true,"data":{},"msg":"问诊结束成功"}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 医生结束问诊
       tags:
       - 问诊
   /dept/add:
