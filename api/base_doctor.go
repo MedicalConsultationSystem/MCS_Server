@@ -26,7 +26,6 @@ func ListAllDoctor(c *gin.Context) {
 	}
 }
 
-
 // @Tags 医生
 // @Summary 注册医生信息
 // @Security ApiKeyAuth
@@ -38,21 +37,20 @@ func ListAllDoctor(c *gin.Context) {
 func AddDoctor(c *gin.Context) {
 	var newDoctorMsg request.AddDoctor
 	_ = c.ShouldBindJSON(&newDoctorMsg)
-	if err:=verify.Verify(newDoctorMsg,verify.AddDoctorVerify);err!=nil{
-		response.FailWithMsg(err.Error(),c)
+	if err := verify.Verify(newDoctorMsg, verify.AddDoctorVerify); err != nil {
+		response.FailWithMsg(err.Error(), c)
 		return
 	}
-	doctor := model.BaseDoctor{DoctorId: newDoctorMsg.DoctorId,DoctorName: newDoctorMsg.DoctorName,OrgId: newDoctorMsg.OrgId,
-		OrgName: newDoctorMsg.OrgName,DeptId: newDoctorMsg.DeptId,DeptName: newDoctorMsg.DeptName,AvatarUrl: newDoctorMsg.AvatarUrl,
-		LevelCode: newDoctorMsg.LevelCode,LevelName: newDoctorMsg.LevelName}
-	if err:= service.AddDoctor(doctor);err!=nil{
-		global.MCS_Log.Error("医生注册失败",zap.Any("err",err))
-		response.FailWithMsg(err.Error(),c)
-	}else {
-		response.SuccessWithMsg("医生注册成功",c)
+	doctor := model.BaseDoctor{DoctorId: newDoctorMsg.DoctorId, DoctorName: newDoctorMsg.DoctorName, OrgId: newDoctorMsg.OrgId,
+		OrgName: newDoctorMsg.OrgName, DeptId: newDoctorMsg.DeptId, DeptName: newDoctorMsg.DeptName, AvatarUrl: newDoctorMsg.AvatarUrl,
+		LevelCode: newDoctorMsg.LevelCode, LevelName: newDoctorMsg.LevelName}
+	if err := service.AddDoctor(doctor); err != nil {
+		global.MCS_Log.Error("医生注册失败", zap.Any("err", err))
+		response.FailWithMsg(err.Error(), c)
+	} else {
+		response.SuccessWithMsg("医生注册成功", c)
 	}
 }
-
 
 // @Tags 医生
 // @Summary 根据姓名模糊查询医生
@@ -61,13 +59,36 @@ func AddDoctor(c *gin.Context) {
 // @Param data body request.FindDoctorByName true "医生姓名"
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"医生信息获取成功"}"
 // @Router /doctor/findByName [post]
-func FindDoctorByName(c *gin.Context){
+func FindDoctorByName(c *gin.Context) {
 	var msg request.FindDoctorByName
-	_  = c.ShouldBindJSON(&msg)
-	if err,data := service.FindDoctorByName(msg.DoctorName);err != nil{
-		global.MCS_Log.Error("医生信息获取失败",zap.Any("err",err))
-		response.FailWithMsg("医生信息获取失败:"+err.Error(),c)
+	_ = c.ShouldBindJSON(&msg)
+	if err, data := service.FindDoctorByName(msg.DoctorName); err != nil {
+		global.MCS_Log.Error("医生信息获取失败", zap.Any("err", err))
+		response.FailWithMsg("医生信息获取失败:"+err.Error(), c)
+	} else {
+		response.SuccessWithAll(data, "医生信息获取成功", c)
+	}
+}
+
+
+// @Tags 医生
+// @Summary 更新医生信息
+// @Security ApiKeyAuth
+// @Produce application/json
+// @Param data body model.BaseDoctor true "数据库中医生结构体"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"医生信息更新成功"}"
+// @Router /doctor/updateDoctor [put]
+func UpdateDoctor(c *gin.Context) {
+	var baseDoctor model.BaseDoctor
+	_ = c.ShouldBindJSON(&baseDoctor)
+	if err := verify.Verify(baseDoctor, verify.BaseDoctorVerify); err != nil {
+		response.FailWithMsg(err.Error(),c)
+		return
+	}
+	if err := service.UpdateDoctor(baseDoctor);err != nil{
+		global.MCS_Log.Error("医生信息更新失败",zap.Any("err",err))
+		response.FailWithMsg("医生信息更新失败:"+err.Error(),c)
 	}else {
-		response.SuccessWithAll(data,"医生信息获取成功",c)
+		response.SuccessWithMsg("医生信息更新成功",c)
 	}
 }

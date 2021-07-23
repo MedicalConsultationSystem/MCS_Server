@@ -14,6 +14,8 @@ var (
 	BaseDrugVerify = Rules{"DrugId":{NotEmpty},"DrugName": {NotEmpty}, "TradeName": {NotEmpty},
 		"PinyinCode": {NotEmpty}, "Specification": {NotEmpty}, "PackUnit": {NotEmpty},
 		"Price": {NotEmpty}, "Dose": {NotEmpty}, "DoseUnit": {NotEmpty}}
+	BaseDoctorVerify = Rules{"DoctorId":{NotEmpty},"DoctorName":{NotEmpty},
+		"OrgId":{NotEmpty},"OrgName":{NotEmpty},"DeptId":{NotEmpty},"DeptName":{NotEmpty}}
 	AddConsultVerify = Rules{"OrgId":{NotEmpty},"OrgName":{NotEmpty},"DeptId":{NotEmpty},
 		"DeptName":{NotEmpty},"DoctorId":{NotEmpty},"DoctorName":{NotEmpty},
 		"CreateUserId":{NotEmpty},"PersonName":{NotEmpty},"PersonCardType":{NotEmpty},

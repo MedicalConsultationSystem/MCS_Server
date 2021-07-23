@@ -30,3 +30,7 @@ func FindDoctorByName(doctorName string) (err error,doctors []model.BaseDoctor){
 	err = global.MCS_DB.Model(&model.BaseDoctor{}).Where("doctor_name LIKE ?","%"+doctorName+"%").Find(&doctors).Error
 	return
 }
+
+func UpdateDoctor(doctor model.BaseDoctor) error {
+	return global.MCS_DB.Where("doctor_id = ?",doctor.DoctorId).Save(&doctor).Error
+}
