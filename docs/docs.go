@@ -243,6 +243,41 @@ var doc = `{
                 }
             }
         },
+        "/dept/findDept": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "科室"
+                ],
+                "summary": "根据科室名称模糊查询",
+                "parameters": [
+                    {
+                        "description": "科室名称",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/request.FindDept"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"科室信息获取成功\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/dept/listAll": {
             "get": {
                 "security": [
@@ -1279,6 +1314,14 @@ var doc = `{
             "type": "object",
             "properties": {
                 "create_user_id": {
+                    "type": "string"
+                }
+            }
+        },
+        "request.FindDept": {
+            "type": "object",
+            "properties": {
+                "dept_name": {
                     "type": "string"
                 }
             }

@@ -91,3 +91,21 @@ func UpdateDept(c *gin.Context){
 	}
 
 }
+
+// @Tags 科室
+// @Summary 根据科室名称模糊查询
+// @Security ApiKeyAuth
+// @Produce application/json
+// @Param data body request.FindDept true "科室名称"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"科室信息获取成功"}"
+// @Router /dept/findDept [post]
+func FindDept(c *gin.Context){
+	var msg request.FindDept
+	_ = c.ShouldBindJSON(&msg)
+	if err,data := service.FindDept(msg.DeptName);err != nil{
+		global.MCS_Log.Error("科室信息获取失败",zap.Any("err",err))
+		response.FailWithMsg("科室信息获取失败",c)
+	}else {
+		response.SuccessWithAll(data,"科室信息获取成功",c)
+	}
+}

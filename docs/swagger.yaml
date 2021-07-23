@@ -177,6 +177,11 @@ definitions:
       create_user_id:
         type: string
     type: object
+  request.FindDept:
+    properties:
+      dept_name:
+        type: string
+    type: object
   request.FindDoctorByName:
     properties:
       doctor_name:
@@ -386,6 +391,27 @@ paths:
       security:
       - ApiKeyAuth: []
       summary: 根据传入的科室结构体删除数据库中对应科室信息
+      tags:
+      - 科室
+  /dept/findDept:
+    post:
+      parameters:
+      - description: 科室名称
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/request.FindDept'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"success":true,"data":{},"msg":"科室信息获取成功"}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 根据科室名称模糊查询
       tags:
       - 科室
   /dept/listAll:

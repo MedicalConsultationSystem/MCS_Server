@@ -29,3 +29,8 @@ func UpdateDept(dept model.BaseDept) error {
 	}
 	return global.MCS_DB.Where("dept_id = ?",dept.DeptId).Save(&dept).Error
 }
+
+func FindDept(name string) (err error,data []model.BaseDept){
+	err = global.MCS_DB.Model(&model.BaseDept{}).Where("dept_name LIKE ?","%"+name+"%").Find(&data).Error
+	return
+}

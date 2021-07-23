@@ -12,5 +12,6 @@ func InitDeptRouter(Router *gin.RouterGroup)  {
 		deptRouter.GET("listAll",api.ListAllDept)
 		deptRouter.DELETE("deleteDept",api.DeleteDept)
 		deptRouter.PUT("updateDept",api.UpdateDept)
+		deptRouter.POST("findDept",api.FindDept)
 	}
 }
