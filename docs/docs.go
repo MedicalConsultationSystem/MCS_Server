@@ -757,6 +757,41 @@ var doc = `{
                 }
             }
         },
+        "/organization/findOrg": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "机构"
+                ],
+                "summary": "根据机构名称模糊查询",
+                "parameters": [
+                    {
+                        "description": "机构名称",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/request.FindOrg"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"机构信息获取成功\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/organization/listAll": {
             "get": {
                 "security": [
@@ -1346,6 +1381,14 @@ var doc = `{
             "type": "object",
             "properties": {
                 "pinyin": {
+                    "type": "string"
+                }
+            }
+        },
+        "request.FindOrg": {
+            "type": "object",
+            "properties": {
+                "org_name": {
                     "type": "string"
                 }
             }

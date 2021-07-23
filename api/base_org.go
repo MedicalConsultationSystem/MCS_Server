@@ -92,3 +92,22 @@ func UpdateOrg(c *gin.Context){
 	}
 
 }
+
+
+// @Tags 机构
+// @Summary 根据机构名称模糊查询
+// @Security ApiKeyAuth
+// @Produce application/json
+// @Param data body request.FindOrg true "机构名称"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"机构信息获取成功"}"
+// @Router /organization/findOrg [post]
+func FindOrg(c *gin.Context){
+	var msg request.FindOrg
+	_ = c.ShouldBindJSON(&msg)
+	if err,data := service.FindOrg(msg.OrgName);err != nil{
+		global.MCS_Log.Error("机构信息获取失败",zap.Any("err",err))
+		response.FailWithMsg("机构信息获取失败",c)
+	}else {
+		response.SuccessWithAll(data,"机构信息获取成功",c)
+	}
+}

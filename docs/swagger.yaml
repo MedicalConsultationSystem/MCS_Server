@@ -197,6 +197,11 @@ definitions:
       pinyin:
         type: string
     type: object
+  request.FindOrg:
+    properties:
+      org_name:
+        type: string
+    type: object
   request.ListPrescription:
     properties:
       consult_id:
@@ -698,6 +703,27 @@ paths:
       security:
       - ApiKeyAuth: []
       summary: 根据传入的机构结构体删除数据库中对应机构信息
+      tags:
+      - 机构
+  /organization/findOrg:
+    post:
+      parameters:
+      - description: 机构名称
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/request.FindOrg'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"success":true,"data":{},"msg":"机构信息获取成功"}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 根据机构名称模糊查询
       tags:
       - 机构
   /organization/listAll:

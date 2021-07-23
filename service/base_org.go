@@ -29,3 +29,8 @@ func UpdateOrg(org model.BaseOrg) error {
 	}
 	return global.MCS_DB.Where("org_id = ?",org.OrgId).Save(&org).Error
 }
+
+func FindOrg(name string) (err error,data []model.BaseOrg){
+	err = global.MCS_DB.Model(&model.BaseOrg{}).Where("org_name LIKE ?","%"+name+"%").Find(&data).Error
+	return
+}

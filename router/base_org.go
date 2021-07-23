@@ -12,5 +12,6 @@ func InitOrgRouter(Router *gin.RouterGroup){
 		orgRouter.GET("listAll",api.ListAllOrg)
 		orgRouter.DELETE("deleteOrg",api.DeleteOrg)
 		orgRouter.PUT("updateOrg",api.UpdateOrg)
+		orgRouter.POST("findOrg",api.FindOrg)
 	}
 }
