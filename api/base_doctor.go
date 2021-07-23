@@ -92,3 +92,21 @@ func UpdateDoctor(c *gin.Context) {
 		response.SuccessWithMsg("医生信息更新成功",c)
 	}
 }
+
+// @Tags 医生
+// @Summary 删除医生信息
+// @Security ApiKeyAuth
+// @Produce application/json
+// @Param data body request.DeleteDoctor true "医生id"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"医生信息删除成功"}"
+// @Router /doctor/deleteDoctor [delete]
+func DeleteDoctor(c *gin.Context){
+	var msg request.DeleteDoctor
+	_ = c.ShouldBindJSON(&msg)
+	if err := service.DeleteDoctor(msg.DoctorId);err !=nil{
+		global.MCS_Log.Error("医生信息删除失败",zap.Any("err",err))
+		response.FailWithMsg("医生信息删除失败:"+err.Error(),c)
+	}else {
+		response.SuccessWithMsg("医生信息删除成功",c)
+	}
+}

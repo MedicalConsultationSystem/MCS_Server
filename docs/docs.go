@@ -375,6 +375,41 @@ var doc = `{
                 }
             }
         },
+        "/doctor/deleteDoctor": {
+            "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "医生"
+                ],
+                "summary": "删除医生信息",
+                "parameters": [
+                    {
+                        "description": "医生id",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/request.DeleteDoctor"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"医生信息删除成功\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/doctor/findByName": {
             "post": {
                 "security": [
@@ -427,6 +462,41 @@ var doc = `{
                 "responses": {
                     "200": {
                         "description": "{\"success\":true,\"data\":{},\"msg\":\"医生信息获取成功\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/doctor/updateDoctor": {
+            "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "医生"
+                ],
+                "summary": "更新医生信息",
+                "parameters": [
+                    {
+                        "description": "数据库中医生结构体",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.BaseDoctor"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"医生信息更新成功\"}",
                         "schema": {
                             "type": "string"
                         }
@@ -1092,6 +1162,38 @@ var doc = `{
                 }
             }
         },
+        "model.BaseDoctor": {
+            "type": "object",
+            "properties": {
+                "avatar_url": {
+                    "type": "string"
+                },
+                "dept_id": {
+                    "type": "integer"
+                },
+                "dept_name": {
+                    "type": "string"
+                },
+                "doctor_id": {
+                    "type": "string"
+                },
+                "doctor_name": {
+                    "type": "string"
+                },
+                "level_code": {
+                    "type": "string"
+                },
+                "level_name": {
+                    "type": "string"
+                },
+                "org_id": {
+                    "type": "integer"
+                },
+                "org_name": {
+                    "type": "string"
+                }
+            }
+        },
         "model.BaseDrug": {
             "type": "object",
             "properties": {
@@ -1317,6 +1419,14 @@ var doc = `{
                     "type": "string"
                 },
                 "user_id": {
+                    "type": "string"
+                }
+            }
+        },
+        "request.DeleteDoctor": {
+            "type": "object",
+            "properties": {
+                "doctor_id": {
                     "type": "string"
                 }
             }

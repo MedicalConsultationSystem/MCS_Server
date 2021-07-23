@@ -7,6 +7,27 @@ definitions:
       dept_name:
         type: string
     type: object
+  model.BaseDoctor:
+    properties:
+      avatar_url:
+        type: string
+      dept_id:
+        type: integer
+      dept_name:
+        type: string
+      doctor_id:
+        type: string
+      doctor_name:
+        type: string
+      level_code:
+        type: string
+      level_name:
+        type: string
+      org_id:
+        type: integer
+      org_name:
+        type: string
+    type: object
   model.BaseDrug:
     properties:
       approval_number:
@@ -155,6 +176,11 @@ definitions:
       prescription_type:
         type: string
       user_id:
+        type: string
+    type: object
+  request.DeleteDoctor:
+    properties:
+      doctor_id:
         type: string
     type: object
   request.DeletePrescription:
@@ -477,6 +503,27 @@ paths:
       summary: 注册医生信息
       tags:
       - 医生
+  /doctor/deleteDoctor:
+    delete:
+      parameters:
+      - description: 医生id
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/request.DeleteDoctor'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"success":true,"data":{},"msg":"医生信息删除成功"}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 删除医生信息
+      tags:
+      - 医生
   /doctor/findByName:
     post:
       parameters:
@@ -510,6 +557,27 @@ paths:
       security:
       - ApiKeyAuth: []
       summary: 获取所有医生信息
+      tags:
+      - 医生
+  /doctor/updateDoctor:
+    put:
+      parameters:
+      - description: 数据库中医生结构体
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/model.BaseDoctor'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"success":true,"data":{},"msg":"医生信息更新成功"}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 更新医生信息
       tags:
       - 医生
   /drug/add:

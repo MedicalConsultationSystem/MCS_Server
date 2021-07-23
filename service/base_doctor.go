@@ -34,3 +34,17 @@ func FindDoctorByName(doctorName string) (err error,doctors []model.BaseDoctor){
 func UpdateDoctor(doctor model.BaseDoctor) error {
 	return global.MCS_DB.Where("doctor_id = ?",doctor.DoctorId).Save(&doctor).Error
 }
+
+func DeleteDoctor(doctorId string) (err error){
+	var account model.BaseAccount
+	err = global.MCS_DB.Where("phone_no = ?",doctorId).First(&account).Error
+	if err !=nil{
+		return
+	}
+	err =global.MCS_DB.Model(&model.BaseAccount{}).Where("phone_no = ?",doctorId).Update("user_type","1").Error
+	if err != nil{
+		return
+	}
+	err = global.MCS_DB.Where("doctor_id = ?",doctorId).Delete(&model.BaseDoctor{}).Error
+	return
+}

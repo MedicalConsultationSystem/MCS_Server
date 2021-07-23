@@ -12,5 +12,6 @@ func InitDoctorRouter(Router *gin.RouterGroup){
 		doctorRouter.POST("add",api.AddDoctor)
 		doctorRouter.POST("findByName",api.FindDoctorByName)
 		doctorRouter.PUT("updateDoctor",api.UpdateDoctor)
+		doctorRouter.DELETE("deleteDoctor",api.DeleteDoctor)
 	}
 }

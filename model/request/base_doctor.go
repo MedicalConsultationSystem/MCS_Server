@@ -15,3 +15,7 @@ type AddDoctor struct {
 type FindDoctorByName struct {
 	DoctorName string `json:"doctor_name"`
 }
+
+type DeleteDoctor struct {
+	DoctorId   string `json:"doctor_id"`
+}
