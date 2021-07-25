@@ -9,5 +9,6 @@ func InitUserRouter(Router *gin.RouterGroup)  {
 	accountRouter := Router.Group("account")
 	{
 		accountRouter.POST("login",api.Login)
+		accountRouter.POST("admin",api.Admin)
 	}
 }

@@ -52,3 +52,34 @@ func Login(c *gin.Context) {
 		}, "登录成功", c)
 	}
 }
+
+// @Tags 账户
+// @Summary 管理员登录
+// @Security ApiKeyAuth
+// @accept application/json
+// @Produce application/json
+// @Param data body request.Login true "微信小程序 Appid AppSecret code"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"登录成功"}"
+// @Router /account/admin [post]
+func Admin(c *gin.Context){
+	var loginMsg request.Login
+	_ = c.ShouldBindJSON(&loginMsg)
+	if loginMsg.OpenId == loginMsg.Phone && loginMsg.OpenId == "admin" {
+		j := &middleware.JWT{SigningKey: []byte(global.MCS_Config.JWT.SigningKey)}
+		claims := request.Claims{
+			UserId:     loginMsg.OpenId,
+			BufferTime: global.MCS_Config.JWT.BufferTime,
+			StandardClaims: jwt.StandardClaims{
+				NotBefore: time.Now().Unix() - 1000,
+				ExpiresAt: time.Now().Unix() + global.MCS_Config.JWT.ExpiresTime,
+				Issuer:    "MCS_admin",
+			},
+		}
+		token, err := j.CreateToken(claims)
+		if err != nil {
+			global.MCS_Log.Error("获取Token失败！", zap.Any("err", err))
+			response.FailWithMsg(err.Error(), c)
+		}
+		response.SuccessWithAll(token, "登录成功", c)
+	}
+}

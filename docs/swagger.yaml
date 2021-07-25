@@ -297,6 +297,29 @@ info:
   title: Swagger MCS_Server API
   version: 0.0.1
 paths:
+  /account/admin:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 微信小程序 Appid AppSecret code
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/request.Login'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"success":true,"data":{},"msg":"登录成功"}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 管理员登录
+      tags:
+      - 账户
   /account/login:
     post:
       consumes:
