@@ -11,7 +11,7 @@ import (
 
 func JWTHandler() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		token := c.Request.Header.Get("mcs_token")
+		token := c.Request.Header.Get("x-token")
 		if token == "" {
 			response.FailWithAll(gin.H{"reload": true}, "未登录或非法访问", c)
 			c.Abort()
